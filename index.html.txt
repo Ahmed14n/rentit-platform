@@ -1,0 +1,2484 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RentIt | Rent What You Need, Rent Out What You Own!</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#ecfeff',
+              100: '#cffafe',
+              400: '#22d3ee',
+              500: '#06b6d4',
+              600: '#0891b2',
+              700: '#0e7490',
+              900: '#164e63',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Splash Screen & Kinetic Logo Animations */
+    @keyframes logoFloat {
+      0%, 100% {
+        transform: translateY(0px) scale(1);
+      }
+      50% {
+        transform: translateY(-6px) scale(1.03);
+      }
+    }
+
+    @keyframes letterReveal {
+      0% {
+        opacity: 0;
+        transform: translateY(18px) scale(0.9);
+        filter: blur(6px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+      }
+    }
+
+    @keyframes progressSweep {
+      0% {
+        width: 0%;
+      }
+      100% {
+        width: 100%;
+      }
+    }
+
+    @keyframes fadeSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .splash-logo-icon {
+      animation: logoFloat 2.2s ease-in-out infinite;
+    }
+
+    .kinetic-char {
+      display: inline-block;
+      opacity: 0;
+      animation: letterReveal 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .splash-progress {
+      animation: progressSweep 2.1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    .animate-card {
+      animation: fadeSlideUp 0.4s ease-out forwards;
+    }
+
+    /* Custom Dark Mode Scrollbar */
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #020617;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 999px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #475569;
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-cyan-400 selection:text-slate-950">
+
+  <!-- ==================== 1. ANIMATED SPLASH SCREEN ==================== -->
+  <div id="splash-screen" class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-slate-950 text-white transition-opacity duration-700">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.22)_0%,rgba(2,6,23,1)_70%)] pointer-events-none"></div>
+
+    <div class="relative z-10 flex flex-col items-center px-6 text-center">
+      <!-- Custom RentIt SVG Brand Emblem -->
+      <div class="splash-logo-icon mb-6 flex h-32 w-32 items-center justify-center rounded-3xl bg-gradient-to-br from-cyan-400 via-teal-500 to-sky-600 p-0.5 shadow-2xl shadow-cyan-500/30">
+        <div class="flex h-full w-full items-center justify-center rounded-[22px] bg-slate-950/90 backdrop-blur p-2">
+          <svg class="h-26 w-26" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="rentitCyanGrad" x1="15" y1="15" x2="105" y2="105" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#67e8f9"/>
+                <stop offset="0.5" stop-color="#06b6d4"/>
+                <stop offset="1" stop-color="#0284c7"/>
+              </linearGradient>
+            </defs>
+            <path d="M36 22H68C81.2548 22 91 30.5 91 43.5C91 53.5 84.5 60.8 75 63.5L92 94H73L58.5 66H52V94H36V22ZM52 35V53H66.5C72.5 53 76 49.2 76 44C76 38.8 72.5 35 66.5 35H52Z" fill="#ffffff"/>
+            <path d="M89 27C102 36 106 54 99 69" stroke="url(#rentitCyanGrad)" stroke-width="6" stroke-linecap="round"/>
+            <path d="M93 64L98 73L106 66" fill="#22d3ee"/>
+            <path d="M31 93C18 84 14 66 21 51" stroke="url(#rentitCyanGrad)" stroke-width="6" stroke-linecap="round"/>
+            <path d="M27 56L22 47L14 54" fill="#22d3ee"/>
+            <rect x="57" y="38" width="14" height="12" rx="2.5" fill="#22d3ee"/>
+            <path d="M61 38V35.5C61 34.7 61.7 34 62.5 34H65.5C66.3 34 67 34.7 67 35.5V38" stroke="#67e8f9" stroke-width="1.8"/>
+            <circle cx="57" cy="76" r="4.5" fill="#22d3ee"/>
+            <rect x="65" y="72" width="10" height="7" rx="1.8" fill="#67e8f9"/>
+            <circle cx="58" cy="91" r="4" stroke="#22d3ee" stroke-width="2"/>
+            <circle cx="72" cy="91" r="4" stroke="#22d3ee" stroke-width="2"/>
+            <path d="M58 91L64 85H69L72 91" stroke="#67e8f9" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Kinetic Typography Title -->
+      <h1 class="font-display text-5xl sm:text-6xl font-extrabold tracking-tight uppercase">
+        <span class="kinetic-char text-white" style="animation-delay: 0.1s">R</span><span class="kinetic-char text-white" style="animation-delay: 0.18s">E</span><span class="kinetic-char text-white" style="animation-delay: 0.26s">N</span><span class="kinetic-char text-white" style="animation-delay: 0.34s">T</span><span class="kinetic-char text-cyan-400" style="animation-delay: 0.42s">I</span><span class="kinetic-char text-cyan-400" style="animation-delay: 0.50s">T</span>
+      </h1>
+
+      <div class="kinetic-char mt-4 rounded-full border border-cyan-400/30 bg-slate-900/90 px-5 py-2 shadow-lg" style="animation-delay: 0.65s">
+        <p class="text-xs sm:text-base font-bold tracking-wide text-white">
+          Rent What You Need, <span class="text-cyan-400">Rent Out What You Own!</span>
+        </p>
+      </div>
+
+      <!-- Loading Progress Bar -->
+      <div class="mt-8 h-1.5 w-56 overflow-hidden rounded-full bg-slate-800">
+        <div class="splash-progress h-full rounded-full bg-gradient-to-r from-cyan-400 via-teal-400 to-sky-400"></div>
+      </div>
+      <span class="mt-2.5 text-[11px] uppercase tracking-widest text-slate-400">Initializing Escrow & Geolocation Engine...</span>
+    </div>
+  </div>
+
+  <!-- ==================== 2. TOP GLASSMORPHISM NAVBAR ==================== -->
+  <header class="sticky top-0 z-40 border-b border-slate-800/90 bg-slate-950/90 backdrop-blur-md">
+    <div class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
+      <!-- Brand Logo -->
+      <a href="#marketplace" onclick="switchMainView('marketplace')" class="flex items-center gap-2.5 group">
+        <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-500 to-sky-700 p-0.5 shadow-md shadow-cyan-500/20 transition-transform group-hover:scale-105">
+          <div class="flex h-full w-full items-center justify-center rounded-[10px] bg-slate-950">
+            <svg class="h-8 w-8" viewBox="0 0 120 120" fill="none">
+              <path d="M36 22H68C81.2548 22 91 30.5 91 43.5C91 53.5 84.5 60.8 75 63.5L92 94H73L58.5 66H52V94H36V22ZM52 35V53H66.5C72.5 53 76 49.2 76 44C76 38.8 72.5 35 66.5 35H52Z" fill="#ffffff"/>
+              <path d="M89 27C102 36 106 54 99 69" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/>
+              <path d="M31 93C18 84 14 66 21 51" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/>
+              <rect x="57" y="38" width="14" height="12" rx="2.5" fill="#22d3ee"/>
+              <circle cx="58" cy="91" r="4" stroke="#22d3ee" stroke-width="2.5"/>
+              <circle cx="72" cy="91" r="4" stroke="#22d3ee" stroke-width="2.5"/>
+            </svg>
+          </div>
+        </div>
+        <div>
+          <span class="font-display text-xl font-extrabold tracking-tight text-white uppercase">RENT<span class="text-cyan-400">IT</span></span>
+          <span class="hidden sm:block text-[10px] font-semibold tracking-wide text-slate-400">Rent What You Need, Rent Out What You Own!</span>
+        </div>
+      </a>
+
+      <!-- Center Navigation Tabs -->
+      <nav class="flex items-center gap-1 rounded-xl border border-slate-800 bg-slate-900 p-1 text-xs sm:text-sm font-semibold">
+        <button id="nav-marketplace" onclick="switchMainView('marketplace')" class="nav-tab rounded-lg bg-slate-800 px-3 py-1.5 text-cyan-400 shadow-sm transition">
+          Explore Items
+        </button>
+        <button id="nav-dashboard" onclick="switchMainView('dashboard')" class="nav-tab relative rounded-lg px-3 py-1.5 text-slate-400 hover:text-white transition">
+          My Rentals & Listings
+          <span id="badge-bookings" class="ml-1 inline-flex items-center justify-center rounded-full bg-cyan-400 px-1.5 py-0.2 text-[10px] font-bold text-slate-950">0</span>
+        </button>
+        <button id="nav-admin" onclick="switchMainView('admin')" class="nav-tab hidden rounded-lg px-3 py-1.5 text-amber-400 hover:bg-amber-500/10 transition">
+          Admin Panel
+        </button>
+      </nav>
+
+      <!-- Right Controls: Mode Switcher, KYC, AI Advisor, Chat, Notifications, Account -->
+      <div class="flex items-center gap-2">
+        <div id="role-switcher-wrapper" class="hidden md:flex items-center gap-1.5 rounded-xl border border-slate-800 bg-slate-900 px-2.5 py-1">
+          <span class="text-[11px] font-medium text-slate-400">Mode:</span>
+          <select id="role-switcher" onchange="handleRoleSwitch(this.value)" class="bg-slate-900 text-xs font-bold text-slate-100 focus:outline-none cursor-pointer">
+            <option value="borrower">Borrower View</option>
+            <option value="owner">Owner View</option>
+            <option value="admin">Admin View</option>
+          </select>
+        </div>
+
+        <button id="kyc-status-btn" onclick="openKycModal()" class="hidden items-center gap-1.5 rounded-xl border border-cyan-500/30 bg-cyan-500/10 px-2.5 py-1.5 text-xs font-semibold text-cyan-300 hover:bg-cyan-500/20 transition" title="Identity Verification (KYC)">
+          <span id="kyc-dot" class="h-2 w-2 rounded-full bg-cyan-400"></span>
+          <span id="kyc-label">Verify ID</span>
+        </button>
+
+        <!-- Gemini AI Concierge Trigger -->
+        <button onclick="toggleAiAssistantDrawer()" class="flex items-center gap-1.5 rounded-xl border border-cyan-400/40 bg-gradient-to-r from-cyan-500/20 to-teal-500/20 px-2.5 py-1.5 text-xs font-extrabold text-cyan-300 hover:from-cyan-500/30 hover:to-teal-500/30 transition shadow-sm" title="Ask RentIt AI Advisor">
+          <span>✨</span>
+          <span class="hidden sm:inline">AI Advisor</span>
+        </button>
+
+        <!-- In-App Chat Drawer Trigger -->
+        <button onclick="toggleChatDrawer()" class="relative rounded-xl border border-slate-800 bg-slate-900 p-2 text-slate-300 hover:bg-slate-800 hover:text-cyan-400 transition" title="In-App Messages">
+          <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+          </svg>
+          <span id="chat-unread-badge" class="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-cyan-400 text-[10px] font-bold text-slate-950">1</span>
+        </button>
+
+        <!-- Notification Bell -->
+        <div class="relative">
+          <button onclick="toggleNotifDropdown()" class="relative rounded-xl border border-slate-800 bg-slate-900 p-2 text-slate-300 hover:bg-slate-800 hover:text-cyan-400 transition" title="Notifications">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+            </svg>
+            <span id="notif-badge" class="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-amber-400 text-[10px] font-bold text-slate-950">1</span>
+          </button>
+
+          <div id="notif-dropdown" class="hidden absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl border border-slate-800 bg-slate-900 p-4 shadow-2xl z-50">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
+              <h3 class="font-display text-sm font-bold text-white">Real-Time Notifications</h3>
+              <button onclick="markAllNotifsRead()" class="text-xs font-semibold text-cyan-400 hover:underline">Mark all read</button>
+            </div>
+            <div id="notif-list" class="mt-2 max-h-72 space-y-2 overflow-y-auto text-xs"></div>
+          </div>
+        </div>
+
+        <!-- Guest Auth Buttons -->
+        <div id="guest-auth-buttons" class="flex items-center gap-1.5">
+          <button onclick="openAuthModal('login')" class="rounded-xl border border-slate-700 bg-slate-800 px-3 py-2 text-xs font-semibold text-white hover:bg-slate-700 transition">
+            Log In
+          </button>
+          <button onclick="openAuthModal('signup')" class="inline-flex items-center rounded-xl bg-cyan-400 px-3.5 py-2 text-xs font-extrabold text-slate-950 hover:bg-cyan-300 transition shadow-sm">
+            + Sign Up
+          </button>
+        </div>
+
+        <!-- Logged-In Profile Pill & Logout -->
+        <div id="logged-in-user-controls" class="hidden items-center gap-1.5">
+          <button onclick="openKycModal()" class="flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-800 px-3 py-1.5 text-xs font-semibold text-white hover:bg-slate-700 transition">
+            <span id="current-user-avatar" class="flex h-5 w-5 items-center justify-center rounded-full bg-cyan-400 text-[10px] font-bold text-slate-950">U</span>
+            <span id="current-user-name" class="hidden sm:inline">User</span>
+          </button>
+          <button onclick="handleLogout()" class="rounded-xl border border-rose-500/30 bg-rose-500/10 px-2.5 py-1.5 text-xs font-semibold text-rose-300 hover:bg-rose-500/20 transition" title="Log Out">
+            Log Out
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Auth & Mode Bar -->
+    <div class="flex md:hidden items-center justify-between border-t border-slate-800 bg-slate-900 px-4 py-1.5 text-xs">
+      <button onclick="openAuthModal('signup')" class="font-bold text-cyan-400 underline">+ Sign Up / Log In</button>
+      <select id="role-switcher-mobile" onchange="handleRoleSwitch(this.value)" class="hidden rounded-lg border border-slate-700 bg-slate-800 px-2 py-1 font-bold text-slate-100">
+        <option value="borrower">Borrower View</option>
+        <option value="owner">Owner View</option>
+        <option value="admin">Admin View</option>
+      </select>
+    </div>
+  </header>
+
+  <!-- ==================== 3. VIEW 1: MARKETPLACE (HERO + DISCOVERY) ==================== -->
+  <main id="view-marketplace" class="pb-16">
+    <section class="relative overflow-hidden border-b border-slate-800/80 bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950 py-12 sm:py-16 text-white">
+      <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(6,182,212,0.24),transparent_58%)]"></div>
+      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="grid gap-8 lg:grid-cols-12 lg:items-center">
+          <div class="lg:col-span-7">
+            <div class="inline-flex items-center gap-2 rounded-full border border-cyan-400/30 bg-cyan-500/10 px-3.5 py-1 text-xs font-semibold text-cyan-300">
+              <span class="h-2 w-2 rounded-full bg-cyan-400 animate-pulse"></span>
+              Escrow-Protected & QR-Verified Local Equipment Sharing
+            </div>
+            <h1 class="mt-4 font-display text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">
+              Rent What You Need, <span class="text-cyan-400">Rent Out What You Own!</span>
+            </h1>
+            <p class="mt-4 max-w-2xl text-sm sm:text-base text-slate-300 leading-relaxed">
+              Connect with KYC-verified neighbors in <strong class="text-white">Damietta & New Damietta</strong> to rent power drills, DSLR cameras, gaming consoles, bicycles, and specialized gear by the hour or day—backed by Escrow deposits and dual-scan QR handovers.
+            </p>
+
+            <!-- Quick Search Bar -->
+            <div class="mt-7 flex flex-col sm:flex-row gap-2.5 rounded-2xl border border-slate-800 bg-slate-900/95 p-2 shadow-2xl shadow-black/40">
+              <div class="flex flex-1 items-center gap-2.5 px-3 py-2">
+                <svg class="h-5 w-5 text-slate-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 11A6 6 0 115 11a6 6 0 0112 0z"/>
+                </svg>
+                <input id="search-input" oninput="applyFilters()" type="text" placeholder="Search Bosch drill, Sony camera, bicycle, ladder..." class="w-full bg-transparent text-sm text-white placeholder-slate-400 focus:outline-none" />
+              </div>
+              <div class="flex items-center gap-2 border-t sm:border-t-0 sm:border-l border-slate-800 px-3 py-2">
+                <svg class="h-4 w-4 text-cyan-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                </svg>
+                <span class="text-xs font-semibold text-slate-300 whitespace-nowrap">Damietta (Within <span id="hero-dist-label" class="text-cyan-400">10</span> km)</span>
+              </div>
+              <button onclick="document.getElementById('catalog-section').scrollIntoView({behavior:'smooth'})" class="rounded-xl bg-cyan-400 px-6 py-3 text-sm font-extrabold text-slate-950 shadow-md hover:bg-cyan-300 transition">
+                Find Gear
+              </button>
+            </div>
+          </div>
+
+          <!-- Trust Pillars Card -->
+          <div class="lg:col-span-5">
+            <div class="rounded-3xl border border-slate-800 bg-slate-900/75 p-6 backdrop-blur-md shadow-xl">
+              <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+                <div>
+                  <p class="text-xs font-semibold uppercase tracking-wider text-cyan-400">How RentIt Protects You</p>
+                  <h2 class="font-display text-lg font-bold text-white">4-Step Verified Rental Lifecycle</h2>
+                </div>
+                <button onclick="openAddListingModal()" class="rounded-xl bg-amber-400 px-3 py-2 text-xs font-extrabold text-slate-950 hover:bg-amber-300 transition shadow">
+                  + List Your Item
+                </button>
+              </div>
+              <div class="mt-4 space-y-3 text-xs sm:text-sm">
+                <div class="flex items-start gap-3">
+                  <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-cyan-500/20 font-bold text-cyan-400">1</span>
+                  <p class="text-slate-300"><strong class="text-white">KYC Verified Community:</strong> National ID / Passport checked before listing or booking.</p>
+                </div>
+                <div class="flex items-start gap-3">
+                  <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-cyan-500/20 font-bold text-cyan-400">2</span>
+                  <p class="text-slate-300"><strong class="text-white">Real-Time Availability Calendar:</strong> Prevents double bookings with slot locking.</p>
+                </div>
+                <div class="flex items-start gap-3">
+                  <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-cyan-500/20 font-bold text-cyan-400">3</span>
+                  <p class="text-slate-300"><strong class="text-white">Escrow Payment Protection:</strong> Rental fee & deposit held safely until return.</p>
+                </div>
+                <div class="flex items-start gap-3">
+                  <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-cyan-500/20 font-bold text-cyan-400">4</span>
+                  <p class="text-slate-300"><strong class="text-white">Dual-Scan QR Handover:</strong> Scan at pickup to start & scan at return to release deposit.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Location & Multi-Criteria Filter Bar -->
+    <section id="catalog-section" class="mx-auto max-w-7xl px-4 pt-8 sm:px-6 lg:px-8">
+      <div class="flex items-center gap-2 overflow-x-auto pb-3" id="category-pills"></div>
+
+      <div class="mt-3 grid gap-4 rounded-2xl border border-slate-800 bg-slate-900 p-4 shadow-lg sm:grid-cols-2 lg:grid-cols-4">
+        <div>
+          <div class="flex justify-between text-xs font-semibold text-slate-300">
+            <span>Max Proximity Distance</span>
+            <span class="text-cyan-400 font-bold"><span id="dist-value">10</span> km</span>
+          </div>
+          <input id="distance-filter" type="range" min="1" max="25" value="10" oninput="updateDistanceFilter(this.value)" class="mt-2 w-full accent-cyan-400 cursor-pointer" />
+          <div class="flex justify-between text-[10px] text-slate-500">
+            <span>1 km (Neighborhood)</span>
+            <span>25 km (City-wide)</span>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-300">Max Daily Rate (EGP)</label>
+          <select id="price-filter" onchange="applyFilters()" class="mt-1.5 w-full rounded-xl border border-slate-700 bg-slate-800 px-3 py-2 text-xs font-semibold text-slate-100 focus:border-cyan-400 focus:outline-none">
+            <option value="9999">Any Price</option>
+            <option value="150">Up to 150 EGP / day</option>
+            <option value="300">Up to 300 EGP / day</option>
+            <option value="500">Up to 500 EGP / day</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-300">Availability Status</label>
+          <select id="avail-filter" onchange="applyFilters()" class="mt-1.5 w-full rounded-xl border border-slate-700 bg-slate-800 px-3 py-2 text-xs font-semibold text-slate-100 focus:border-cyan-400 focus:outline-none">
+            <option value="all">All Listings</option>
+            <option value="available">Available Today Only</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-300">Sort Results By</label>
+          <select id="sort-filter" onchange="applyFilters()" class="mt-1.5 w-full rounded-xl border border-slate-700 bg-slate-800 px-3 py-2 text-xs font-semibold text-slate-100 focus:border-cyan-400 focus:outline-none">
+            <option value="distance">Nearest Distance First</option>
+            <option value="price-low">Lowest Daily Price</option>
+            <option value="rating">Highest Owner Rating</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="mt-6 flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <h2 class="font-display text-xl font-bold text-white">Available Equipment Near You</h2>
+          <p id="results-subtitle" class="text-xs text-slate-400">Showing 8 verified items within 10 km</p>
+        </div>
+        <button onclick="openAddListingModal()" class="inline-flex items-center gap-2 rounded-xl bg-cyan-400 px-4 py-2.5 text-xs font-extrabold text-slate-950 shadow-sm hover:bg-cyan-300 transition">
+          <span>+ Post New Item</span>
+        </button>
+      </div>
+
+      <div id="listings-grid" class="mt-5 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"></div>
+
+      <!-- AI Smart Recommendation Section -->
+      <div class="mt-12 rounded-3xl border border-cyan-500/30 bg-gradient-to-br from-slate-900 via-slate-900 to-cyan-950/30 p-6 shadow-xl">
+        <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-4">
+          <div class="flex items-center gap-3">
+            <div class="flex h-10 w-10 items-center justify-center rounded-2xl bg-cyan-400/20 text-lg text-cyan-300 border border-cyan-400/30">
+              ✨
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <h2 class="font-display text-lg font-extrabold text-white">AI Smart Recommendations</h2>
+                <span class="rounded-full bg-cyan-400/15 border border-cyan-400/30 px-2.5 py-0.5 text-[10px] font-bold text-cyan-300">ML Content-Based Filtering</span>
+              </div>
+              <p id="ai-rec-reason" class="text-xs text-slate-400">Personalized picks based on cosine similarity, proximity & local demand in Damietta</p>
+            </div>
+          </div>
+          <button onclick="refreshAiRecommendations()" class="rounded-xl border border-slate-700 bg-slate-800 px-3 py-1.5 text-xs font-semibold text-cyan-300 hover:bg-slate-700 transition">
+            ↻ Refresh ML Picks
+          </button>
+        </div>
+        <div id="ai-recommendations-grid" class="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== 4. VIEW 2: USER DASHBOARD ==================== -->
+  <section id="view-dashboard" class="hidden mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 pb-20">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-5">
+      <div>
+        <h1 class="font-display text-2xl font-extrabold text-white">My Rentals & Equipment Hub</h1>
+        <p class="text-xs sm:text-sm text-slate-400">Manage your active bookings, Escrow payments, QR handovers, and listed items.</p>
+      </div>
+      <div class="flex gap-2">
+        <button onclick="openAddListingModal()" class="rounded-xl bg-cyan-400 px-4 py-2.5 text-xs font-extrabold text-slate-950 shadow hover:bg-cyan-300 transition">
+          + List New Item
+        </button>
+      </div>
+    </div>
+
+    <div class="mt-6 flex flex-wrap gap-2">
+      <button id="subtab-borrower" onclick="switchDashboardTab('borrower')" class="rounded-xl bg-cyan-400 px-4 py-2 text-xs font-extrabold text-slate-950 transition">
+        My Borrowed Rentals (<span id="count-borrower-rentals">0</span>)
+      </button>
+      <button id="subtab-owner" onclick="switchDashboardTab('owner')" class="rounded-xl border border-slate-800 bg-slate-900 px-4 py-2 text-xs font-bold text-slate-300 hover:bg-slate-800 transition">
+        Incoming Owner Requests & My Listings (<span id="count-owner-requests">0</span>)
+      </button>
+    </div>
+
+    <div id="panel-borrower" class="mt-6 space-y-4"></div>
+
+    <div id="panel-owner" class="hidden mt-6 space-y-8">
+      <div>
+        <h2 class="font-display text-lg font-bold text-white mb-3">Incoming Rental Requests (Action Required)</h2>
+        <div id="owner-requests-list" class="space-y-4"></div>
+      </div>
+      <div>
+        <h2 class="font-display text-lg font-bold text-white mb-3">My Published Listings</h2>
+        <div id="owner-listings-grid" class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 5. VIEW 3: ADMIN MODERATION DASHBOARD ==================== -->
+  <section id="view-admin" class="hidden mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 pb-20">
+    <div class="rounded-3xl border border-slate-800 bg-slate-900 p-6 sm:p-8 text-white shadow-xl">
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <span class="rounded-full bg-amber-400/20 px-3 py-1 text-xs font-bold text-amber-300">UC-15: Admin Moderation & Trust Center</span>
+          <h1 class="mt-2 font-display text-2xl sm:text-3xl font-extrabold">RentIt Platform Governance</h1>
+          <p class="mt-1 text-xs sm:text-sm text-slate-300">Verify user National ID / Passport KYC submissions, moderate listings, and monitor Escrow funds.</p>
+        </div>
+      </div>
+
+      <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="rounded-2xl bg-slate-950/70 p-4 border border-slate-800">
+          <p class="text-xs text-slate-400">Active Listings</p>
+          <p id="admin-kpi-listings" class="mt-1 font-display text-2xl font-extrabold text-white">8</p>
+        </div>
+        <div class="rounded-2xl bg-slate-950/70 p-4 border border-slate-800">
+          <p class="text-xs text-slate-400">Pending KYC Reviews</p>
+          <p id="admin-kpi-kyc" class="mt-1 font-display text-2xl font-extrabold text-amber-400">0</p>
+        </div>
+        <div class="rounded-2xl bg-slate-950/70 p-4 border border-slate-800">
+          <p class="text-xs text-slate-400">Active Escrow Held (EGP)</p>
+          <p id="admin-kpi-escrow" class="mt-1 font-display text-2xl font-extrabold text-cyan-400">0 EGP</p>
+        </div>
+        <div class="rounded-2xl bg-slate-950/70 p-4 border border-slate-800">
+          <p class="text-xs text-slate-400">Completed QR Handovers</p>
+          <p id="admin-kpi-completed" class="mt-1 font-display text-2xl font-extrabold text-sky-400">0</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-8 grid gap-8 lg:grid-cols-2">
+      <div class="rounded-2xl border border-slate-800 bg-slate-900 p-6 shadow-sm">
+        <h2 class="font-display text-lg font-bold text-white">KYC Identity Verification Queue</h2>
+        <p class="text-xs text-slate-400 mb-4">Approve or reject uploaded National IDs / Passports (Req-3 & Req-16).</p>
+        <div id="admin-kyc-list" class="space-y-3"></div>
+      </div>
+
+      <div class="rounded-2xl border border-slate-800 bg-slate-900 p-6 shadow-sm">
+        <h2 class="font-display text-lg font-bold text-white">Listing Moderation</h2>
+        <p class="text-xs text-slate-400 mb-4">Verify safety compliance and approve or remove listed items.</p>
+        <div id="admin-listings-list" class="space-y-3 max-h-[420px] overflow-y-auto pr-1"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 6. FOOTER ==================== -->
+  <footer class="border-t border-slate-800 bg-slate-950 py-8 text-xs text-slate-400">
+    <div class="mx-auto flex max-w-7xl flex-col sm:flex-row items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center gap-2.5">
+        <span class="font-display text-base font-extrabold text-white uppercase">RENT<span class="text-cyan-400">IT</span></span>
+        <span>• Rent What You Need, Rent Out What You Own! • Damietta, Egypt</span>
+      </div>
+      <div class="flex flex-wrap items-center gap-4">
+        <button onclick="openAuthModal('signup')" class="font-semibold text-slate-300 hover:text-cyan-400">Create Account</button>
+        <button onclick="replaySplash()" class="font-semibold text-cyan-400 hover:underline">Replay Intro Logo</button>
+        <button onclick="resetDemoData()" class="font-semibold text-rose-400 hover:underline">Reset Demo Data</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== 7. MODALS & DRAWERS ==================== -->
+
+  <!-- MODAL A: ITEM DETAILS + AVAILABILITY CALENDAR + BOOKING -->
+  <div id="item-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-4 backdrop-blur-sm overflow-y-auto">
+    <div class="relative my-8 w-full max-w-4xl rounded-3xl border border-slate-800 bg-slate-900 shadow-2xl overflow-hidden animate-card">
+      <button onclick="closeModal('item-modal')" class="absolute right-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-slate-800/90 text-slate-200 shadow hover:bg-slate-700">✕</button>
+      <div id="item-modal-content" class="grid md:grid-cols-12"></div>
+    </div>
+  </div>
+
+  <!-- MODAL B: ESCROW CHECKOUT PAYMENT (UC-11) -->
+  <div id="escrow-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-4 backdrop-blur-sm">
+    <div class="w-full max-w-md rounded-3xl border border-slate-800 bg-slate-900 p-6 shadow-2xl animate-card">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div class="flex items-center gap-2">
+          <span class="flex h-8 w-8 items-center justify-center rounded-xl bg-cyan-500/20 text-cyan-400 font-bold">🔒</span>
+          <h3 class="font-display text-lg font-bold text-white">Escrow Secure Checkout</h3>
+        </div>
+        <button onclick="closeModal('escrow-modal')" class="text-slate-400 hover:text-white">✕</button>
+      </div>
+      <div id="escrow-modal-body" class="mt-4"></div>
+    </div>
+  </div>
+
+  <!-- MODAL C: QR CODE HANDOVER & RETURN VERIFICATION (UC-12) -->
+  <div id="qr-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-4 backdrop-blur-sm">
+    <div class="w-full max-w-md rounded-3xl border border-slate-800 bg-slate-900 p-6 text-center shadow-2xl animate-card">
+      <div class="flex justify-end">
+        <button onclick="closeModal('qr-modal')" class="text-slate-400 hover:text-white">✕</button>
+      </div>
+      <div id="qr-modal-body"></div>
+    </div>
+  </div>
+
+  <!-- MODAL D: ADD NEW LISTING (UC-04) + ML PRICE ADVISOR -->
+  <div id="add-listing-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-4 backdrop-blur-sm overflow-y-auto">
+    <div class="my-8 w-full max-w-lg rounded-3xl border border-slate-800 bg-slate-900 p-6 shadow-2xl animate-card">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <h3 class="font-display text-lg font-bold text-white">List Equipment for Rent (UC-04)</h3>
+        <button onclick="closeModal('add-listing-modal')" class="text-slate-400 hover:text-white">✕</button>
+      </div>
+      <form onsubmit="submitNewListing(event)" class="mt-4 space-y-3.5 text-xs sm:text-sm">
+        <div>
+          <label class="block font-semibold text-slate-300">Equipment Title *</label>
+          <input id="new-title" required type="text" placeholder="e.g., Bosch GBH 2-26 Rotary Hammer Drill" class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-800 px-3 py-2 text-white placeholder-slate-400 focus:border-cyan-400 focus:outline-none" />
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-semibold text-slate-300">Category *</label>
+            <select id="new-category" onchange="resetAiPriceBanner()" class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-800 px-3 py-2 text-white focus:border-cyan-400 focus:outline-none">
+              <option value="Power Tools">Power Tools</option>
+              <option value="Cameras & Audio">Cameras & Audio</option>
+              <option value="Woodworking">Woodworking</option>
+              <option value="Gardening & Outdoor">Gardening & Outdoor</option>
+              <option value="Home Maintenance">Home Maintenance</option>
+              <option value="Measurement & Testing">Measurement & Testing</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-300">Condition *</label>
+            <select id="new-condition" onchange="resetAiPriceBanner()" class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-800 px-3 py-2 text-white focus:border-cyan-400 focus:outline-none">
+              <option value="Like New">Like New</option>
+              <option value="Excellent">Excellent</option>
+              <option value="Good">Good</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- ML Dynamic Pricing Advisor Box -->
+        <div class="rounded-2xl border border-cyan-500/30 bg-cyan-950/25 p-3.5">
+          <div class="flex items-center justify-between gap-2">
+            <div>
+              <p class="text-xs font-extrabold text-cyan-300">✨ AI Dynamic Price Advisor (ML Regression)</p>
+              <p class="text-[11px] text-slate-400">Predict optimal rates & Escrow deposit from local Damietta demand</p>
+            </div>
+            <button type="button" onclick="runAiPricePrediction()" class="shrink-0 rounded-xl bg-cyan-400 px-3 py-1.5 text-xs font-extrabold text-slate-950 hover:bg-cyan-300 transition shadow">
+              Predict Price
+            </button>
+          </div>
+          <div id="ai-price-result" class="hidden mt-3 border-t border-cyan-500/20 pt-2.5 text-xs"></div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block font-semibold text-slate-300">Hourly Rate (EGP)</label>
+            <input id="new-hourly" required type="number" min="10" value="35" class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-800 px-3 py-2 text-white focus:border-cyan-400 focus:outline-none" />
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-300">Daily Rate (EGP)</label>
+            <input id="new-daily" required type="number" min="20" value="180" class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-800 px-3 py-2 text-white focus:border-cyan-400 focus:outline-none" />
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-300">Deposit (EGP)</label>
+            <input id="new-deposit" required type="number" min="50" value="600" class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-800 px-3 py-2 text-white focus:border-cyan-400 focus:outline-none" />
+          </div>
+        </div>
+        <div>
+          <label class="block font-semibold text-slate-300">Pickup Area / Neighborhood *</label>
+          <input id="new-location" required type="text" value="New Damietta - Central District" class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-800 px-3 py-2 text-white focus:border-cyan-400 focus:outline-none" />
+        </div>
+        <div>
+          <label class="block font-semibold text-slate-300">Equipment Image URL</label>
+          <input id="new-image" type="url" value="https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=800&q=80" class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-800 px-3 py-2 text-white focus:border-cyan-400 focus:outline-none" />
+        </div>
+        <div>
+          <label class="block font-semibold text-slate-300">Description & Rental Terms *</label>
+          <textarea id="new-desc" required rows="2" placeholder="Includes battery, charger, and carrying case. Must be returned clean." class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-800 px-3 py-2 text-white placeholder-slate-400 focus:border-cyan-400 focus:outline-none"></textarea>
+        </div>
+        <button type="submit" class="w-full rounded-xl bg-cyan-400 py-3 text-sm font-extrabold text-slate-950 shadow-lg hover:bg-cyan-300 transition">
+          Publish Listing
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL E: KYC IDENTITY VERIFICATION (UC-03) -->
+  <div id="kyc-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-4 backdrop-blur-sm">
+    <div class="w-full max-w-md rounded-3xl border border-slate-800 bg-slate-900 p-6 shadow-2xl animate-card">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <h3 class="font-display text-lg font-bold text-white">Identity Verification (KYC)</h3>
+        <button onclick="closeModal('kyc-modal')" class="text-slate-400 hover:text-white">✕</button>
+      </div>
+      <div id="kyc-modal-body" class="mt-4 text-xs sm:text-sm"></div>
+    </div>
+  </div>
+
+  <!-- MODAL F: MUTUAL RATING & REVIEW (UC-14) -->
+  <div id="review-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-4 backdrop-blur-sm">
+    <div class="w-full max-w-md rounded-3xl border border-slate-800 bg-slate-900 p-6 shadow-2xl animate-card">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <h3 class="font-display text-lg font-bold text-white">Rate & Review Experience (UC-14)</h3>
+        <button onclick="closeModal('review-modal')" class="text-slate-400 hover:text-white">✕</button>
+      </div>
+      <div id="review-modal-body" class="mt-4"></div>
+    </div>
+  </div>
+
+  <!-- MODAL G: AUTH / REGISTER & LOGIN (UC-01 & UC-16) -->
+  <div id="auth-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-4 backdrop-blur-sm overflow-y-auto">
+    <div class="my-8 w-full max-w-lg rounded-3xl border border-slate-800 bg-slate-900 p-6 shadow-2xl animate-card">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div class="flex items-center gap-2.5">
+          <div class="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-950 border border-cyan-400/40 p-1">
+            <svg class="h-6 w-6" viewBox="0 0 120 120" fill="none">
+              <path d="M36 22H68C81.2548 22 91 30.5 91 43.5C91 53.5 84.5 60.8 75 63.5L92 94H73L58.5 66H52V94H36V22ZM52 35V53H66.5C72.5 53 76 49.2 76 44C76 38.8 72.5 35 66.5 35H52Z" fill="#ffffff"/>
+              <path d="M89 27C102 36 106 54 99 69" stroke="#22d3ee" stroke-width="8" stroke-linecap="round"/>
+              <path d="M31 93C18 84 14 66 21 51" stroke="#22d3ee" stroke-width="8" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-display text-lg font-bold text-white">RentIt Member Portal</h3>
+            <p class="text-[11px] text-cyan-400">Rent What You Need, Rent Out What You Own!</p>
+          </div>
+        </div>
+        <button onclick="closeModal('auth-modal')" class="text-slate-400 hover:text-white">✕</button>
+      </div>
+
+      <!-- Auth Tabs -->
+      <div class="mt-4 grid grid-cols-2 gap-1.5 rounded-xl border border-slate-800 bg-slate-950 p-1 text-xs font-bold">
+        <button id="auth-tab-signup" onclick="switchAuthTab('signup')" class="rounded-lg bg-slate-800 py-2 text-cyan-400 shadow-xs transition">
+          Create New Account (Sign Up)
+        </button>
+        <button id="auth-tab-login" onclick="switchAuthTab('login')" class="rounded-lg py-2 text-slate-400 hover:text-white transition">
+          Log In
+        </button>
+      </div>
+
+      <!-- TAB 1: SIGN UP FORM (UC-16) -->
+      <form id="auth-form-signup" onsubmit="handleRegisterNewUser(event)" class="mt-4 space-y-3 text-xs sm:text-sm">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block font-semibold text-slate-300">Full Name *</label>
+            <input id="reg-name" required type="text" placeholder="e.g., Youssef El-Sayed" class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-800 px-3 py-2 text-white placeholder-slate-400 focus:border-cyan-400 focus:outline-none" />
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-300">Phone Number *</label>
+            <input id="reg-phone" required type="tel" placeholder="010XXXXXXXX" class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-800 px-3 py-2 text-white placeholder-slate-400 focus:border-cyan-400 focus:outline-none" />
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block font-semibold text-slate-300">Email Address *</label>
+            <input id="reg-email" required type="email" placeholder="user@rentit.eg" class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-800 px-3 py-2 text-white placeholder-slate-400 focus:border-cyan-400 focus:outline-none" />
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-300">Password *</label>
+            <input id="reg-password" required type="password" placeholder="••••••••" class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-800 px-3 py-2 text-white placeholder-slate-400 focus:border-cyan-400 focus:outline-none" />
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block font-semibold text-slate-300">City / District *</label>
+            <select id="reg-location" class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-800 px-3 py-2 text-white focus:border-cyan-400 focus:outline-none">
+              <option value="New Damietta - Central District">New Damietta - Central District</option>
+              <option value="Damietta - Corniche El-Nile">Damietta - Corniche El-Nile</option>
+              <option value="Damietta - Al-Aasar">Damietta - Al-Aasar</option>
+              <option value="Ras El-Bar - Villa Zone">Ras El-Bar - Villa Zone</option>
+              <option value="Kafr Saad">Kafr Saad</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-300">Primary Account Mode</label>
+            <select id="reg-role" class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-800 px-3 py-2 text-white focus:border-cyan-400 focus:outline-none">
+              <option value="borrower">Borrower (Rent Tools)</option>
+              <option value="owner">Equipment Owner (List & Earn)</option>
+            </select>
+          </div>
+        </div>
+        <div class="rounded-xl bg-amber-500/10 border border-amber-500/30 p-2.5 text-[11px] text-amber-300">
+          <strong>Note:</strong> Newly registered accounts start with <em>Unverified KYC</em> status so you can upload an ID card (UC-03) and verify it!
+        </div>
+        <button type="submit" class="w-full rounded-xl bg-cyan-400 py-3 text-sm font-extrabold text-slate-950 shadow-md hover:bg-cyan-300 transition">
+          Create Account & Sign In
+        </button>
+      </form>
+
+      <!-- TAB 2: LOGIN FORM (UC-01) -->
+      <div id="auth-form-login" class="hidden mt-4 space-y-4 text-xs sm:text-sm">
+        <form onsubmit="handleCustomLogin(event)" class="space-y-3">
+          <div>
+            <label class="block font-semibold text-slate-300">Email Address *</label>
+            <input id="login-email" required type="email" placeholder="Enter your registered email" class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-800 px-3 py-2 text-white placeholder-slate-400 focus:border-cyan-400 focus:outline-none" />
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-300">Password *</label>
+            <input id="login-password" required type="password" placeholder="Enter your password" class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-800 px-3 py-2 text-white placeholder-slate-400 focus:border-cyan-400 focus:outline-none" />
+          </div>
+          <button type="submit" class="w-full rounded-xl bg-cyan-400 py-3 text-sm font-extrabold text-slate-950 hover:bg-cyan-300 transition shadow-md">
+            Log In to Account
+          </button>
+        </form>
+
+        <div class="rounded-xl border border-slate-800 bg-slate-950/70 p-3 text-center text-xs text-slate-400">
+          Don't have an account yet?
+          <button type="button" onclick="switchAuthTab('signup')" class="font-bold text-cyan-400 hover:underline ml-1">Create a new account</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE-OVER DRAWER: IN-APP MESSAGING (UC-13) -->
+  <div id="chat-drawer" class="hidden fixed inset-0 z-50 flex justify-end bg-black/70 backdrop-blur-xs">
+    <div class="flex h-full w-full max-w-md flex-col border-l border-slate-800 bg-slate-900 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-slate-800 bg-slate-950 px-5 py-4 text-white">
+        <div>
+          <h3 class="font-display text-base font-bold">RentIt In-App Messenger (UC-13)</h3>
+          <p id="chat-partner-subtitle" class="text-[11px] text-cyan-400">Direct encrypted coordination with Equipment Owner</p>
+        </div>
+        <button onclick="toggleChatDrawer()" class="rounded-lg bg-slate-800 px-2.5 py-1 text-xs text-slate-300 hover:bg-slate-700">✕</button>
+      </div>
+      <div id="chat-messages-box" class="flex-1 space-y-3 overflow-y-auto bg-slate-950 p-4 text-xs sm:text-sm"></div>
+      <form onsubmit="sendChatMessage(event)" class="flex gap-2 border-t border-slate-800 bg-slate-900 p-3">
+        <input id="chat-input" type="text" placeholder="Ask about pickup time, accessories, location..." class="flex-1 rounded-xl border border-slate-700 bg-slate-800 px-3 py-2 text-xs sm:text-sm text-white placeholder-slate-400 focus:border-cyan-400 focus:outline-none" />
+        <button type="submit" class="rounded-xl bg-cyan-400 px-4 py-2 text-xs font-extrabold text-slate-950 hover:bg-cyan-300 transition">Send</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- SLIDE-OVER DRAWER: GEMINI AI EQUIPMENT ADVISOR -->
+  <div id="ai-drawer" class="hidden fixed inset-0 z-50 flex justify-end bg-black/75 backdrop-blur-xs">
+    <div class="flex h-full w-full max-w-md flex-col border-l border-cyan-500/30 bg-slate-900 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-slate-800 bg-gradient-to-r from-slate-950 to-cyan-950/60 px-5 py-4 text-white">
+        <div class="flex items-center gap-2.5">
+          <div class="flex h-9 w-9 items-center justify-center rounded-xl bg-cyan-400/20 border border-cyan-400/40 text-lg">✨</div>
+          <div>
+            <h3 class="font-display text-base font-bold">RentIt AI Project Advisor</h3>
+            <p class="text-[11px] text-cyan-300">Powered by Gemini AI • Smart Tool & Rental Assistant</p>
+          </div>
+        </div>
+        <button onclick="toggleAiAssistantDrawer()" class="rounded-lg bg-slate-800 px-2.5 py-1 text-xs text-slate-300 hover:bg-slate-700">✕</button>
+      </div>
+
+      <div class="flex gap-1.5 overflow-x-auto border-b border-slate-800 bg-slate-950/70 px-4 py-2.5 text-[11px]">
+        <button onclick="askAiPreset('I want to hang heavy shelves on a concrete wall, what tools do I need from RentIt?')" class="whitespace-nowrap rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 font-semibold text-cyan-300 hover:bg-cyan-500/20">
+          🔨 Hang concrete shelves
+        </button>
+        <button onclick="askAiPreset('What equipment should I rent for a graduation photoshoot in Ras El-Bar?')" class="whitespace-nowrap rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 font-semibold text-cyan-300 hover:bg-cyan-500/20">
+          📸 Photoshoot gear
+        </button>
+        <button onclick="askAiPreset('How does Escrow deposit and QR handover protect me on RentIt?')" class="whitespace-nowrap rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 font-semibold text-cyan-300 hover:bg-cyan-500/20">
+          🔒 Explain Escrow & QR
+        </button>
+      </div>
+
+      <div id="ai-messages-box" class="flex-1 space-y-3 overflow-y-auto bg-slate-950 p-4 text-xs sm:text-sm">
+        <div class="flex flex-col items-start">
+          <span class="text-[10px] text-cyan-400 mb-0.5 font-semibold">RentIt AI Advisor</span>
+          <div class="max-w-[88%] rounded-2xl rounded-bl-none border border-cyan-500/25 bg-slate-900 px-3.5 py-2.5 text-slate-200 leading-relaxed">
+            Hello! Describe the task or project you're working on (e.g., <em>"painting an apartment"</em> or <em>"building a wooden table"</em>), and I'll recommend the exact tools available near you on <strong class="text-cyan-400">RentIt</strong> along with safety tips!
+          </div>
+        </div>
+      </div>
+
+      <form onsubmit="sendAiPrompt(event)" class="flex gap-2 border-t border-slate-800 bg-slate-900 p-3">
+        <input id="ai-input" type="text" placeholder="Describe your task or ask about any equipment..." class="flex-1 rounded-xl border border-slate-700 bg-slate-800 px-3 py-2 text-xs sm:text-sm text-white placeholder-slate-400 focus:border-cyan-400 focus:outline-none" />
+        <button id="ai-send-btn" type="submit" class="rounded-xl bg-cyan-400 px-4 py-2 text-xs font-extrabold text-slate-950 hover:bg-cyan-300 transition">Ask AI</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION BANNER -->
+  <div id="toast-container" class="fixed bottom-5 right-5 z-[90] flex flex-col gap-2 pointer-events-none"></div>
+
+  <!-- ==================== 8. APPLICATION LOGIC ==================== -->
+  <script>
+    const STORAGE_KEY = 'rentit_platform_state_v2';
+
+    const CATEGORIES = [
+      'All Equipment',
+      'Power Tools',
+      'Cameras & Audio',
+      'Woodworking',
+      'Gardening & Outdoor',
+      'Home Maintenance',
+      'Measurement & Testing'
+    ];
+
+    const INITIAL_STATE = {
+      currentRole: 'borrower',
+      currentUser: null,
+      selectedCategory: 'All Equipment',
+      lastViewedCategory: 'Power Tools',
+      lastViewedItemId: 'item-1',
+      registeredAccounts: [],
+      kycQueue: [],
+      listings: [
+        {
+          id: 'item-1',
+          title: 'Bosch GBH 2-26 DRE Rotary Hammer Drill',
+          category: 'Power Tools',
+          condition: 'Like New',
+          hourlyRate: 35,
+          dailyRate: 180,
+          deposit: 600,
+          distanceKm: 0.8,
+          location: 'New Damietta - First District',
+          ownerId: 'u2',
+          ownerName: 'Omar Selim',
+          ownerRating: 4.9,
+          reviewsCount: 24,
+          availableToday: true,
+          bookedDates: ['2026-11-26', '2026-11-27'],
+          image: 'https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=800&q=80',
+          description: 'Heavy-duty 800W SDS-plus rotary hammer drill with 3 masonry drill bits and depth gauge. Ideal for concrete drilling and home renovation.'
+        },
+        {
+          id: 'item-2',
+          title: 'Sony Alpha a6400 Mirrorless 4K Camera Kit',
+          category: 'Cameras & Audio',
+          condition: 'Excellent',
+          hourlyRate: 70,
+          dailyRate: 380,
+          deposit: 2500,
+          distanceKm: 1.4,
+          location: 'Damietta - Corniche El-Nile',
+          ownerId: 'u2',
+          ownerName: 'Omar Selim',
+          ownerRating: 5.0,
+          reviewsCount: 19,
+          availableToday: true,
+          bookedDates: ['2026-11-28'],
+          image: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=800&q=80',
+          description: 'Includes 16-50mm OSS lens, 2 batteries, 64GB SD card, and padded travel bag. Perfect for graduation shoots and events.'
+        },
+        {
+          id: 'item-3',
+          title: 'DeWalt DWE575 7-1/4" Circular Saw',
+          category: 'Woodworking',
+          condition: 'Like New',
+          hourlyRate: 40,
+          dailyRate: 210,
+          deposit: 800,
+          distanceKm: 2.1,
+          location: 'New Damietta - Second District',
+          ownerId: 'u4',
+          ownerName: 'Kareem Mahmoud',
+          ownerRating: 4.8,
+          reviewsCount: 14,
+          availableToday: true,
+          bookedDates: [],
+          image: 'https://images.unsplash.com/photo-1572981779307-38b8cabb2407?auto=format&fit=crop&w=800&q=80',
+          description: 'Lightweight 1600W circular saw with 24-tooth carbide blade and dust blower for clean straight wood cuts.'
+        },
+        {
+          id: 'item-4',
+          title: 'Kärcher K4 Full Control Pressure Washer',
+          category: 'Home Maintenance',
+          condition: 'Excellent',
+          hourlyRate: 45,
+          dailyRate: 240,
+          deposit: 900,
+          distanceKm: 3.2,
+          location: 'Damietta - Al-Maniya',
+          ownerId: 'u5',
+          ownerName: 'Tarek Hassan',
+          ownerRating: 4.7,
+          reviewsCount: 11,
+          availableToday: true,
+          bookedDates: ['2026-11-25'],
+          image: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80',
+          description: 'High-pressure washer (130 bar) with Vario Power spray lance and dirt blaster for cars, patios, and building facades.'
+        },
+        {
+          id: 'item-5',
+          title: 'Fluke 117 Digital True-RMS Multimeter & Clamp',
+          category: 'Measurement & Testing',
+          condition: 'Like New',
+          hourlyRate: 25,
+          dailyRate: 120,
+          deposit: 450,
+          distanceKm: 1.9,
+          location: 'New Damietta - University District',
+          ownerId: 'u2',
+          ownerName: 'Omar Selim',
+          ownerRating: 4.9,
+          reviewsCount: 31,
+          availableToday: true,
+          bookedDates: [],
+          image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=800&q=80',
+          description: 'Professional electrician multimeter with non-contact voltage detection, temperature probe, and insulated test leads.'
+        },
+        {
+          id: 'item-6',
+          title: 'Black+Decker 550W Electric Hedge Trimmer',
+          category: 'Gardening & Outdoor',
+          condition: 'Good',
+          hourlyRate: 30,
+          dailyRate: 140,
+          deposit: 400,
+          distanceKm: 4.5,
+          location: 'Ras El-Bar - Villa Zone',
+          ownerId: 'u6',
+          ownerName: 'Hossam Eldin',
+          ownerRating: 4.6,
+          reviewsCount: 8,
+          availableToday: true,
+          bookedDates: [],
+          image: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=800&q=80',
+          description: '50cm dual-action hardened steel blades with safety lock-off switch for garden hedges and shrubs.'
+        },
+        {
+          id: 'item-7',
+          title: 'Telescopic Aluminum Extension Ladder (4.4m)',
+          category: 'Home Maintenance',
+          condition: 'Excellent',
+          hourlyRate: 25,
+          dailyRate: 130,
+          deposit: 500,
+          distanceKm: 2.7,
+          location: 'Damietta - Bab El-Haras',
+          ownerId: 'u4',
+          ownerName: 'Kareem Mahmoud',
+          ownerRating: 4.8,
+          reviewsCount: 17,
+          availableToday: false,
+          bookedDates: ['2026-11-24'],
+          image: 'https://images.unsplash.com/photo-1513467535987-fd81bc7d62f8?auto=format&fit=crop&w=800&q=80',
+          description: 'Compact foldable telescopic ladder, supports up to 150kg, fits easily inside any hatchback car trunk.'
+        },
+        {
+          id: 'item-8',
+          title: 'Makita 18V Cordless Angle Grinder Kit',
+          category: 'Power Tools',
+          condition: 'Like New',
+          hourlyRate: 35,
+          dailyRate: 175,
+          deposit: 650,
+          distanceKm: 5.4,
+          location: 'Kafr Saad - Main Road',
+          ownerId: 'u5',
+          ownerName: 'Tarek Hassan',
+          ownerRating: 4.9,
+          reviewsCount: 22,
+          availableToday: true,
+          bookedDates: [],
+          image: 'https://images.unsplash.com/photo-1530124566582-a618bc2615dc?auto=format&fit=crop&w=800&q=80',
+          description: 'Brushless 115mm cordless grinder with two 5.0Ah Li-Ion batteries, fast charger, and metal/stone cutting discs.'
+        }
+      ],
+      bookings: [],
+      messages: [
+        {
+          id: 'm1',
+          sender: 'Omar Selim',
+          role: 'owner',
+          text: 'Welcome! Feel free to message me if you want to check tool availability or pickup times.',
+          time: '10:15 AM'
+        }
+      ],
+      notifications: [
+        {
+          id: 'n1',
+          title: 'Welcome to RentIt!',
+          desc: 'Create your account or log in to start renting or listing equipment.',
+          time: 'Just now',
+          read: false
+        }
+      ]
+    };
+
+    let state = loadState();
+
+    function loadState() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) return JSON.parse(saved);
+      } catch (e) {
+        console.warn('Storage fallback', e);
+      }
+      return JSON.parse(JSON.stringify(INITIAL_STATE));
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (e) {
+        console.warn('Save failed', e);
+      }
+      updateHeaderBadges();
+    }
+
+    function resetDemoData() {
+      localStorage.removeItem(STORAGE_KEY);
+      state = JSON.parse(JSON.stringify(INITIAL_STATE));
+      saveState();
+      renderAll();
+      showToast('Demo data reset to initial state!', 'info');
+    }
+
+    // ==================== SPLASH SCREEN CONTROL ====================
+    window.addEventListener('DOMContentLoaded', () => {
+      renderAll();
+      setTimeout(() => {
+        const splash = document.getElementById('splash-screen');
+        splash.classList.add('opacity-0', 'pointer-events-none');
+        setTimeout(() => splash.classList.add('hidden'), 700);
+      }, 2200);
+    });
+
+    function replaySplash() {
+      const splash = document.getElementById('splash-screen');
+      splash.classList.remove('hidden', 'opacity-0', 'pointer-events-none');
+      setTimeout(() => {
+        splash.classList.add('opacity-0', 'pointer-events-none');
+        setTimeout(() => splash.classList.add('hidden'), 700);
+      }, 2100);
+    }
+
+    // ==================== NAVIGATION & ROLE SWITCHING ====================
+    function switchMainView(view) {
+      if ((view === 'dashboard' || view === 'admin') && !state.currentUser) {
+        openAuthModal('signup');
+        showToast('Please create an account or log in first!', 'warning');
+        return;
+      }
+
+      ['marketplace', 'dashboard', 'admin'].forEach(v => {
+        document.getElementById(`view-${v}`).classList.add('hidden');
+        const btn = document.getElementById(`nav-${v}`);
+        if (btn) {
+          btn.classList.remove('bg-slate-800', 'text-cyan-400', 'shadow-sm');
+          btn.classList.add('text-slate-400');
+        }
+      });
+      document.getElementById(`view-${view}`).classList.remove('hidden');
+      const activeBtn = document.getElementById(`nav-${view}`);
+      if (activeBtn) {
+        activeBtn.classList.add('bg-slate-800', 'text-cyan-400', 'shadow-sm');
+        activeBtn.classList.remove('text-slate-400');
+      }
+      if (view === 'dashboard') renderDashboard();
+      if (view === 'admin') renderAdminDashboard();
+    }
+
+    function syncAuthHeaderUI() {
+      const guestBtns = document.getElementById('guest-auth-buttons');
+      const userCtrls = document.getElementById('logged-in-user-controls');
+      const kycBtn = document.getElementById('kyc-status-btn');
+      const roleWrap = document.getElementById('role-switcher-wrapper');
+      const roleMobile = document.getElementById('role-switcher-mobile');
+      const adminTab = document.getElementById('nav-admin');
+
+      if (!state.currentUser) {
+        guestBtns.classList.remove('hidden');
+        userCtrls.classList.add('hidden');
+        userCtrls.classList.remove('flex');
+        kycBtn.classList.add('hidden');
+        kycBtn.classList.remove('flex');
+        roleWrap.classList.add('hidden');
+        roleWrap.classList.remove('md:flex');
+        roleMobile.classList.add('hidden');
+        adminTab.classList.add('hidden');
+      } else {
+        guestBtns.classList.add('hidden');
+        userCtrls.classList.remove('hidden');
+        userCtrls.classList.add('flex');
+        kycBtn.classList.remove('hidden');
+        kycBtn.classList.add('flex');
+        roleWrap.classList.remove('hidden');
+        roleWrap.classList.add('md:flex');
+        roleMobile.classList.remove('hidden');
+
+        document.getElementById('current-user-name').textContent = state.currentUser.name;
+        document.getElementById('current-user-avatar').textContent = state.currentUser.initials;
+        updateKycPill();
+      }
+    }
+
+    function handleRoleSwitch(role) {
+      if (!state.currentUser) {
+        openAuthModal('signup');
+        return;
+      }
+      state.currentRole = role;
+      const selDesktop = document.getElementById('role-switcher');
+      const selMobile = document.getElementById('role-switcher-mobile');
+      if (selDesktop) selDesktop.value = role;
+      if (selMobile) selMobile.value = role;
+
+      const adminTab = document.getElementById('nav-admin');
+      if (role === 'admin') {
+        adminTab.classList.remove('hidden');
+        switchMainView('admin');
+      } else {
+        adminTab.classList.add('hidden');
+        if (role === 'owner') {
+          switchMainView('dashboard');
+          switchDashboardTab('owner');
+        } else {
+          switchMainView('marketplace');
+        }
+      }
+      syncAuthHeaderUI();
+      saveState();
+      showToast(`Switched to ${role.toUpperCase()} view`, 'success');
+    }
+
+    function updateKycPill() {
+      const user = state.currentUser;
+      if (!user) return;
+      const dot = document.getElementById('kyc-dot');
+      const label = document.getElementById('kyc-label');
+      const btn = document.getElementById('kyc-status-btn');
+
+      if (user.kycStatus === 'Verified') {
+        dot.className = 'h-2 w-2 rounded-full bg-cyan-400';
+        label.textContent = 'KYC Verified';
+        btn.className = 'flex items-center gap-1.5 rounded-xl border border-cyan-500/30 bg-cyan-500/10 px-2.5 py-1.5 text-xs font-semibold text-cyan-300 hover:bg-cyan-500/20 transition';
+      } else if (user.kycStatus === 'Pending') {
+        dot.className = 'h-2 w-2 rounded-full bg-amber-400 animate-ping';
+        label.textContent = 'KYC Pending';
+        btn.className = 'flex items-center gap-1.5 rounded-xl border border-amber-500/30 bg-amber-500/10 px-2.5 py-1.5 text-xs font-semibold text-amber-300 hover:bg-amber-500/20 transition';
+      } else {
+        dot.className = 'h-2 w-2 rounded-full bg-rose-400';
+        label.textContent = 'Verify ID';
+        btn.className = 'flex items-center gap-1.5 rounded-xl border border-rose-500/30 bg-rose-500/10 px-2.5 py-1.5 text-xs font-semibold text-rose-300 hover:bg-rose-500/20 transition';
+      }
+    }
+
+    // ==================== MARKETPLACE & FILTERS ====================
+    function renderCategoryPills() {
+      const container = document.getElementById('category-pills');
+      container.innerHTML = CATEGORIES.map(cat => {
+        const active = state.selectedCategory === cat;
+        return `
+          <button onclick="selectCategory('${cat}')" class="whitespace-nowrap rounded-full px-4 py-2 text-xs font-bold transition ${
+            active
+              ? 'bg-cyan-400 text-slate-950 shadow-md shadow-cyan-500/20'
+              : 'border border-slate-800 bg-slate-900 text-slate-300 hover:border-cyan-400/40 hover:text-cyan-400'
+          }">
+            ${cat}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function selectCategory(cat) {
+      state.selectedCategory = cat;
+      renderCategoryPills();
+      applyFilters();
+    }
+
+    function updateDistanceFilter(val) {
+      document.getElementById('dist-value').textContent = val;
+      document.getElementById('hero-dist-label').textContent = val;
+      applyFilters();
+    }
+
+    function applyFilters() {
+      const query = document.getElementById('search-input').value.trim().toLowerCase();
+      const maxDist = parseFloat(document.getElementById('distance-filter').value);
+      const maxPrice = parseFloat(document.getElementById('price-filter').value);
+      const avail = document.getElementById('avail-filter').value;
+      const sortBy = document.getElementById('sort-filter').value;
+
+      let filtered = state.listings.filter(item => {
+        const matchCat = state.selectedCategory === 'All Equipment' || item.category === state.selectedCategory;
+        const matchQuery =
+          !query ||
+          item.title.toLowerCase().includes(query) ||
+          item.description.toLowerCase().includes(query) ||
+          item.location.toLowerCase().includes(query);
+        const matchDist = item.distanceKm <= maxDist;
+        const matchPrice = item.dailyRate <= maxPrice;
+        const matchAvail = avail === 'all' || item.availableToday;
+        return matchCat && matchQuery && matchDist && matchPrice && matchAvail;
+      });
+
+      if (sortBy === 'distance') filtered.sort((a, b) => a.distanceKm - b.distanceKm);
+      if (sortBy === 'price-low') filtered.sort((a, b) => a.dailyRate - b.dailyRate);
+      if (sortBy === 'rating') filtered.sort((a, b) => b.ownerRating - a.ownerRating);
+
+      document.getElementById('results-subtitle').textContent = `Showing ${filtered.length} verified tool${filtered.length === 1 ? '' : 's'} within ${maxDist} km`;
+      renderListingsGrid(filtered);
+    }
+
+    function renderListingsGrid(items) {
+      const grid = document.getElementById('listings-grid');
+      if (!items.length) {
+        grid.innerHTML = `
+          <div class="col-span-full rounded-3xl border border-dashed border-slate-700 bg-slate-900 p-12 text-center">
+            <p class="font-display text-lg font-bold text-white">No equipment matched your filters</p>
+            <p class="mt-1 text-xs text-slate-400">Try increasing the proximity distance slider or clearing the search keyword.</p>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = items
+        .map(
+          item => `
+        <article class="animate-card group flex flex-col overflow-hidden rounded-3xl border border-slate-800 bg-slate-900 shadow-lg transition hover:-translate-y-1 hover:border-cyan-400/40 hover:shadow-cyan-950/30">
+          <div class="relative h-48 w-full overflow-hidden bg-slate-800 cursor-pointer" onclick="openItemModal('${item.id}')">
+            <img src="${item.image}" alt="${item.title}" onerror="this.src='https://placehold.co/600x400/0f172a/22d3ee?text=RentIt+Item'" class="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
+            <div class="absolute left-3 top-3 flex items-center gap-1.5">
+              <span class="rounded-full bg-slate-950/85 border border-slate-700/60 px-2.5 py-1 text-[10px] font-bold text-white backdrop-blur">
+                📍 ${item.distanceKm} km away
+              </span>
+            </div>
+            <div class="absolute right-3 top-3">
+              <span class="rounded-full ${item.availableToday ? 'bg-cyan-400 text-slate-950' : 'bg-amber-400 text-slate-950'} px-2.5 py-1 text-[10px] font-extrabold shadow">
+                ${item.availableToday ? 'Available Now' : 'Booked Today'}
+              </span>
+            </div>
+          </div>
+
+          <div class="flex flex-1 flex-col p-4">
+            <div class="flex items-center justify-between text-[11px] font-semibold text-cyan-400">
+              <span>${item.category}</span>
+              <span class="rounded-md bg-slate-800 px-2 py-0.5 text-slate-300">${item.condition}</span>
+            </div>
+
+            <h3 onclick="openItemModal('${item.id}')" class="mt-1.5 font-display text-base font-bold text-white line-clamp-2 cursor-pointer group-hover:text-cyan-400 transition">
+              ${item.title}
+            </h3>
+
+            <p class="mt-1 text-[11px] text-slate-400">${item.location}</p>
+
+            <div class="mt-3 flex items-center justify-between border-t border-slate-800 pt-2.5 text-xs">
+              <div class="flex items-center gap-1.5">
+                <span class="flex h-6 w-6 items-center justify-center rounded-full bg-cyan-500/20 text-[10px] font-bold text-cyan-300">
+                  ${item.ownerName.split(' ').map(n => n[0]).join('')}
+                </span>
+                <span class="font-medium text-slate-300">${item.ownerName}</span>
+                <span class="text-cyan-400" title="KYC Verified Owner">✔</span>
+              </div>
+              <span class="font-bold text-amber-400">★ ${item.ownerRating} <span class="font-normal text-slate-500">(${item.reviewsCount})</span></span>
+            </div>
+
+            <div class="mt-4 flex items-end justify-between pt-1">
+              <div>
+                <p class="text-[11px] text-slate-400">From <strong class="text-slate-200">${item.hourlyRate} EGP/hr</strong></p>
+                <p class="font-display text-lg font-extrabold text-white">${item.dailyRate} <span class="text-xs font-semibold text-slate-400">EGP / day</span></p>
+              </div>
+              <button onclick="openItemModal('${item.id}')" class="rounded-xl bg-cyan-400 px-3.5 py-2 text-xs font-extrabold text-slate-950 hover:bg-cyan-300 transition">
+                Rent Now
+              </button>
+            </div>
+          </div>
+        </article>
+      `
+        )
+        .join('');
+    }
+
+    // ==================== ITEM DETAILS & BOOKING MODAL ====================
+    function openItemModal(itemId) {
+      const item = state.listings.find(i => i.id === itemId);
+      if (!item) return;
+
+      state.lastViewedCategory = item.category;
+      state.lastViewedItemId = item.id;
+      saveState();
+      renderAiRecommendations();
+
+      const complementary = getComplementaryItems(item, 2);
+
+      const content = document.getElementById('item-modal-content');
+      content.innerHTML = `
+        <div class="md:col-span-5 bg-slate-800 flex flex-col justify-between">
+          <img src="${item.image}" alt="${item.title}" onerror="this.src='https://placehold.co/600x400/0f172a/22d3ee?text=RentIt+Item'" class="h-64 md:h-full w-full object-cover" />
+        </div>
+        <div class="md:col-span-7 p-6 sm:p-7 max-h-[88vh] overflow-y-auto">
+          <div class="flex flex-wrap items-center gap-2 text-xs">
+            <span class="rounded-full bg-cyan-500/20 px-3 py-1 font-bold text-cyan-300">${item.category}</span>
+            <span class="rounded-full bg-slate-800 px-3 py-1 font-semibold text-slate-300">Condition: ${item.condition}</span>
+            <span class="rounded-full bg-amber-500/20 px-3 py-1 font-bold text-amber-300">📍 ${item.distanceKm} km away</span>
+          </div>
+
+          <h2 class="mt-3 font-display text-2xl font-extrabold text-white">${item.title}</h2>
+          <p class="mt-2 text-xs sm:text-sm text-slate-300 leading-relaxed">${item.description}</p>
+
+          <div class="mt-4 flex items-center justify-between rounded-2xl border border-slate-800 bg-slate-950/60 p-3">
+            <div class="flex items-center gap-2.5">
+              <div class="flex h-9 w-9 items-center justify-center rounded-full bg-cyan-400 text-xs font-extrabold text-slate-950">
+                ${item.ownerName.split(' ').map(n => n[0]).join('')}
+              </div>
+              <div>
+                <p class="text-xs font-bold text-white">${item.ownerName} <span class="text-cyan-400">✔ KYC Verified</span></p>
+                <p class="text-[11px] text-slate-400">★ ${item.ownerRating} (${item.reviewsCount} reviews) • ${item.location}</p>
+              </div>
+            </div>
+            <button onclick="closeModal('item-modal'); toggleChatDrawer('${item.ownerName}', '${item.title}')" class="rounded-xl border border-slate-700 bg-slate-800 px-3 py-1.5 text-xs font-bold text-slate-200 hover:border-cyan-400 hover:text-cyan-400 transition">
+              💬 Message Owner
+            </button>
+          </div>
+
+          <form onsubmit="submitBookingRequest(event, '${item.id}')" class="mt-5 space-y-4 border-t border-slate-800 pt-4 text-xs sm:text-sm">
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block font-semibold text-slate-300">Rental Rate Plan</label>
+                <select id="book-plan" onchange="recalcBookingCost('${item.id}')" class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-800 px-3 py-2 font-semibold text-white">
+                  <option value="daily">Daily (${item.dailyRate} EGP / day)</option>
+                  <option value="hourly">Hourly (${item.hourlyRate} EGP / hr)</option>
+                </select>
+              </div>
+              <div>
+                <label class="block font-semibold text-slate-300">Duration (Days / Hours)</label>
+                <input id="book-duration" type="number" min="1" max="14" value="2" oninput="recalcBookingCost('${item.id}')" class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-800 px-3 py-2 font-semibold text-white" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block font-semibold text-slate-300">Pickup Date (Availability Calendar Checked)</label>
+              <input id="book-date" type="date" value="2026-11-29" min="2026-11-24" onchange="checkDateConflict('${item.id}')" class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-800 px-3 py-2 font-semibold text-white" />
+              <p id="calendar-conflict-msg" class="mt-1 text-[11px] text-emerald-400 font-medium">
+                ✔ Selected slot is open (Blocked dates: ${item.bookedDates.length ? item.bookedDates.join(', ') : 'None'})
+              </p>
+            </div>
+
+            <div class="rounded-2xl bg-cyan-500/10 border border-cyan-500/30 p-3.5 space-y-1.5 text-xs">
+              <div class="flex justify-between text-slate-300">
+                <span>Rental Fee (<span id="calc-label">2 days</span>)</span>
+                <span id="calc-rental-fee" class="font-bold text-white">${item.dailyRate * 2} EGP</span>
+              </div>
+              <div class="flex justify-between text-slate-300">
+                <span>Refundable Escrow Security Deposit 🔒</span>
+                <span class="font-bold text-white">${item.deposit} EGP</span>
+              </div>
+              <div class="flex justify-between border-t border-cyan-500/30 pt-1.5 text-sm font-extrabold text-white">
+                <span>Total Held in Escrow</span>
+                <span id="calc-total" class="text-cyan-400">${item.dailyRate * 2 + item.deposit} EGP</span>
+              </div>
+            </div>
+
+            <button id="submit-booking-btn" type="submit" class="w-full rounded-xl bg-cyan-400 py-3 text-sm font-extrabold text-slate-950 shadow-lg shadow-cyan-500/20 hover:bg-cyan-300 transition">
+              Send Rental Request (UC-08)
+            </button>
+          </form>
+
+          <!-- ML Frequently Rented Together Strip -->
+          <div class="mt-5 border-t border-slate-800 pt-4">
+            <p class="text-[11px] font-bold uppercase tracking-wider text-cyan-400 mb-2">✨ AI Frequently Rented Together</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              ${complementary
+                .map(
+                  rec => `
+                <div onclick="openItemModal('${rec.id}')" class="flex items-center gap-2.5 rounded-xl border border-slate-800 bg-slate-950/70 p-2 cursor-pointer hover:border-cyan-400/50 transition">
+                  <img src="${rec.image}" class="h-11 w-11 rounded-lg object-cover shrink-0" />
+                  <div class="min-w-0">
+                    <p class="truncate text-xs font-bold text-white">${rec.title}</p>
+                    <p class="text-[11px] text-cyan-400 font-semibold">${rec.dailyRate} EGP/day • ${rec.matchScore}% Match</p>
+                  </div>
+                </div>
+              `
+                )
+                .join('')}
+            </div>
+          </div>
+        </div>
+      `;
+      document.getElementById('item-modal').classList.remove('hidden');
+    }
+
+    // ==================== MACHINE LEARNING ENGINE ====================
+    function resetAiPriceBanner() {
+      const box = document.getElementById('ai-price-result');
+      if (box) box.classList.add('hidden');
+    }
+
+    function runAiPricePrediction() {
+      const title = document.getElementById('new-title').value.trim().toLowerCase();
+      const category = document.getElementById('new-category').value;
+      const condition = document.getElementById('new-condition').value;
+
+      const categoryBaseRates = {
+        'Power Tools': { daily: 185, deposit: 650, demand: 94 },
+        'Cameras & Audio': { daily: 370, deposit: 2400, demand: 91 },
+        'Woodworking': { daily: 215, deposit: 850, demand: 88 },
+        'Gardening & Outdoor': { daily: 145, deposit: 450, demand: 84 },
+        'Home Maintenance': { daily: 165, deposit: 600, demand: 92 },
+        'Measurement & Testing': { daily: 125, deposit: 500, demand: 86 }
+      };
+
+      const conditionMultiplier = {
+        'Like New': 1.12,
+        'Excellent': 1.0,
+        'Good': 0.85
+      };
+
+      const brandBoost =
+        title.includes('bosch') ||
+        title.includes('sony') ||
+        title.includes('dewalt') ||
+        title.includes('makita') ||
+        title.includes('fluke')
+          ? 1.15
+          : 1.0;
+
+      const base = categoryBaseRates[category] || { daily: 170, deposit: 600, demand: 89 };
+      const mult = (conditionMultiplier[condition] || 1.0) * brandBoost;
+
+      const predictedDaily = Math.round((base.daily * mult) / 5) * 5;
+      const predictedHourly = Math.max(15, Math.round((predictedDaily * 0.2) / 5) * 5);
+      const predictedDeposit = Math.round((base.deposit * mult) / 50) * 50;
+      const bookingProb = Math.min(97, Math.round(base.demand + (brandBoost > 1 ? 3 : 0)));
+
+      document.getElementById('new-hourly').value = predictedHourly;
+      document.getElementById('new-daily').value = predictedDaily;
+      document.getElementById('new-deposit').value = predictedDeposit;
+
+      const resultBox = document.getElementById('ai-price-result');
+      resultBox.classList.remove('hidden');
+      resultBox.innerHTML = `
+        <div class="flex flex-wrap items-center justify-between gap-2 text-slate-200">
+          <span>Recommended: <strong class="text-cyan-400">${predictedHourly} EGP/hr</strong> • <strong class="text-cyan-400">${predictedDaily} EGP/day</strong></span>
+          <span class="rounded-full bg-emerald-500/20 px-2.5 py-0.5 text-[11px] font-bold text-emerald-300">⚡ ${bookingProb}% Fast-Booking Score</span>
+        </div>
+        <p class="mt-1 text-[11px] text-slate-400">Suggested Escrow Deposit: <strong class="text-white">${predictedDeposit} EGP</strong> (Values auto-applied below)</p>
+      `;
+      showToast('AI Price Advisor applied optimal rates!', 'success');
+    }
+
+    function getComplementaryItems(targetItem, count = 3) {
+      const taskPairs = {
+        'Power Tools': ['Home Maintenance', 'Woodworking', 'Measurement & Testing'],
+        'Woodworking': ['Power Tools', 'Home Maintenance', 'Measurement & Testing'],
+        'Home Maintenance': ['Power Tools', 'Gardening & Outdoor', 'Measurement & Testing'],
+        'Cameras & Audio': ['Measurement & Testing', 'Power Tools', 'Home Maintenance'],
+        'Gardening & Outdoor': ['Home Maintenance', 'Power Tools', 'Woodworking'],
+        'Measurement & Testing': ['Power Tools', 'Home Maintenance', 'Woodworking']
+      };
+
+      const preferredCats = taskPairs[targetItem.category] || [];
+      return state.listings
+        .filter(i => i.id !== targetItem.id)
+        .map(item => {
+          let score = 72;
+          if (item.category === targetItem.category) score += 14;
+          if (preferredCats[0] === item.category) score += 19;
+          else if (preferredCats.includes(item.category)) score += 12;
+          if (item.distanceKm <= 3.0) score += 6;
+          score = Math.min(98, score);
+          return { ...item, matchScore: score };
+        })
+        .sort((a, b) => b.matchScore - a.matchScore)
+        .slice(0, count);
+    }
+
+    function renderAiRecommendations() {
+      const grid = document.getElementById('ai-recommendations-grid');
+      const reasonEl = document.getElementById('ai-rec-reason');
+      if (!grid) return;
+
+      const anchorItem = state.listings.find(i => i.id === state.lastViewedItemId) || state.listings[0];
+      if (!anchorItem) return;
+
+      const recs = getComplementaryItems(anchorItem, 3);
+      if (reasonEl) {
+        reasonEl.textContent = `Because you viewed "${anchorItem.title}" (${anchorItem.category}) • Ranked by Cosine Similarity & Distance`;
+      }
+
+      grid.innerHTML = recs
+        .map(
+          item => `
+        <div onclick="openItemModal('${item.id}')" class="group flex items-center gap-3.5 rounded-2xl border border-slate-800 bg-slate-950/80 p-3 cursor-pointer hover:border-cyan-400/50 transition">
+          <img src="${item.image}" alt="${item.title}" class="h-16 w-16 rounded-xl object-cover shrink-0 bg-slate-800" />
+          <div class="min-w-0 flex-1">
+            <div class="flex items-center justify-between gap-1">
+              <span class="rounded-md bg-cyan-400/15 px-2 py-0.5 text-[10px] font-extrabold text-cyan-300">${item.matchScore}% AI Match</span>
+              <span class="text-[10px] text-slate-400">📍 ${item.distanceKm} km</span>
+            </div>
+            <h4 class="mt-1 truncate font-display text-xs sm:text-sm font-bold text-white group-hover:text-cyan-400 transition">${item.title}</h4>
+            <p class="mt-0.5 text-xs font-extrabold text-slate-200">${item.dailyRate} EGP<span class="font-normal text-slate-400">/day</span></p>
+          </div>
+        </div>
+      `
+        )
+        .join('');
+    }
+
+    function refreshAiRecommendations() {
+      const randomItem = state.listings[Math.floor(Math.random() * state.listings.length)];
+      if (randomItem) {
+        state.lastViewedItemId = randomItem.id;
+        state.lastViewedCategory = randomItem.category;
+        renderAiRecommendations();
+        showToast('AI Recommender updated based on latest activity!', 'info');
+      }
+    }
+
+    function recalcBookingCost(itemId) {
+      const item = state.listings.find(i => i.id === itemId);
+      const plan = document.getElementById('book-plan').value;
+      const dur = Math.max(1, parseInt(document.getElementById('book-duration').value) || 1);
+      const rate = plan === 'daily' ? item.dailyRate : item.hourlyRate;
+      const fee = rate * dur;
+      document.getElementById('calc-label').textContent = `${dur} ${plan === 'daily' ? 'day(s)' : 'hour(s)'}`;
+      document.getElementById('calc-rental-fee').textContent = `${fee} EGP`;
+      document.getElementById('calc-total').textContent = `${fee + item.deposit} EGP`;
+    }
+
+    function checkDateConflict(itemId) {
+      const item = state.listings.find(i => i.id === itemId);
+      const picked = document.getElementById('book-date').value;
+      const msg = document.getElementById('calendar-conflict-msg');
+      const btn = document.getElementById('submit-booking-btn');
+
+      if (item.bookedDates.includes(picked)) {
+        msg.className = 'mt-1 text-[11px] text-rose-400 font-bold';
+        msg.textContent = `✕ Conflict: ${picked} is already booked on the availability calendar! Pick another date.`;
+        btn.disabled = true;
+        btn.classList.add('opacity-50', 'cursor-not-allowed');
+      } else {
+        msg.className = 'mt-1 text-[11px] text-emerald-400 font-medium';
+        msg.textContent = `✔ Selected slot (${picked}) is available!`;
+        btn.disabled = false;
+        btn.classList.remove('opacity-50', 'cursor-not-allowed');
+      }
+    }
+
+    function submitBookingRequest(e, itemId) {
+      e.preventDefault();
+      if (!state.currentUser) {
+        closeModal('item-modal');
+        openAuthModal('signup');
+        showToast('Please sign up or log in to send a rental request!', 'warning');
+        return;
+      }
+      const user = state.currentUser;
+      if (user.kycStatus !== 'Verified') {
+        closeModal('item-modal');
+        openKycModal();
+        showToast('Please complete KYC Identity Verification before booking!', 'warning');
+        return;
+      }
+
+      const item = state.listings.find(i => i.id === itemId);
+      const plan = document.getElementById('book-plan').value;
+      const dur = Math.max(1, parseInt(document.getElementById('book-duration').value) || 1);
+      const startDate = document.getElementById('book-date').value;
+      const rate = plan === 'daily' ? item.dailyRate : item.hourlyRate;
+      const rentalFee = rate * dur;
+
+      const newBooking = {
+        id: 'BK-' + Math.floor(1000 + Math.random() * 9000),
+        itemId: item.id,
+        itemTitle: item.title,
+        itemImage: item.image,
+        borrowerName: user.name,
+        ownerName: item.ownerName,
+        durationType: plan,
+        durationCount: dur,
+        startDate,
+        rentalFee,
+        deposit: item.deposit,
+        totalAmount: rentalFee + item.deposit,
+        status: 'Pending Approval',
+        qrToken: 'RENTIT-QR-' + Math.floor(100000 + Math.random() * 900000),
+        reviewed: false
+      };
+
+      item.bookedDates.push(startDate);
+      state.bookings.unshift(newBooking);
+      addNotification('Rental Request Sent', `Request ${newBooking.id} for "${item.title}" sent to ${item.ownerName}.`);
+      saveState();
+      closeModal('item-modal');
+      switchMainView('dashboard');
+      switchDashboardTab('borrower');
+      showToast('Rental request submitted! Switch to Owner mode to approve or test workflow.', 'success');
+    }
+
+    // ==================== DASHBOARD: BORROWER & OWNER WORKFLOWS ====================
+    function switchDashboardTab(tab) {
+      const bBtn = document.getElementById('subtab-borrower');
+      const oBtn = document.getElementById('subtab-owner');
+      if (tab === 'borrower') {
+        bBtn.className = 'rounded-xl bg-cyan-400 px-4 py-2 text-xs font-extrabold text-slate-950 transition';
+        oBtn.className = 'rounded-xl border border-slate-800 bg-slate-900 px-4 py-2 text-xs font-bold text-slate-300 hover:bg-slate-800 transition';
+        document.getElementById('panel-borrower').classList.remove('hidden');
+        document.getElementById('panel-owner').classList.add('hidden');
+      } else {
+        oBtn.className = 'rounded-xl bg-cyan-400 px-4 py-2 text-xs font-extrabold text-slate-950 transition';
+        bBtn.className = 'rounded-xl border border-slate-800 bg-slate-900 px-4 py-2 text-xs font-bold text-slate-300 hover:bg-slate-800 transition';
+        document.getElementById('panel-owner').classList.remove('hidden');
+        document.getElementById('panel-borrower').classList.add('hidden');
+      }
+    }
+
+    function renderDashboard() {
+      document.getElementById('count-borrower-rentals').textContent = state.bookings.length;
+      document.getElementById('count-owner-requests').textContent = state.bookings.filter(b => b.status === 'Pending Approval').length;
+
+      const bContainer = document.getElementById('panel-borrower');
+      if (!state.bookings.length) {
+        bContainer.innerHTML = `<div class="rounded-2xl border border-dashed border-slate-700 bg-slate-900 p-10 text-center text-sm text-slate-400">No rental requests yet. Browse the marketplace to rent your first tool!</div>`;
+      } else {
+        bContainer.innerHTML = state.bookings
+          .map(bk => {
+            let badgeColor = 'bg-amber-500/20 text-amber-300';
+            if (bk.status.includes('Approved')) badgeColor = 'bg-sky-500/20 text-sky-300';
+            if (bk.status.includes('Ready')) badgeColor = 'bg-indigo-500/20 text-indigo-300';
+            if (bk.status === 'Active Rental') badgeColor = 'bg-emerald-500/20 text-emerald-300';
+            if (bk.status === 'Completed') badgeColor = 'bg-slate-800 text-slate-300';
+
+            let actionButton = '';
+            if (bk.status === 'Pending Approval') {
+              actionButton = `
+                <div class="flex flex-wrap gap-2">
+                  <button onclick="ownerDecision('${bk.id}', true)" class="rounded-xl bg-slate-800 border border-slate-700 px-3 py-2 text-xs font-bold text-white hover:bg-slate-700" title="Simulate owner approval">
+                    ⚡ Simulate Owner Approval
+                  </button>
+                  <button onclick="cancelBooking('${bk.id}')" class="rounded-xl border border-rose-500/30 px-3 py-2 text-xs font-semibold text-rose-400 hover:bg-rose-500/10">
+                    Cancel (UC-10)
+                  </button>
+                </div>
+              `;
+            } else if (bk.status === 'Approved - Pay Escrow') {
+              actionButton = `
+                <button onclick="openEscrowModal('${bk.id}')" class="rounded-xl bg-cyan-400 px-4 py-2 text-xs font-extrabold text-slate-950 shadow hover:bg-cyan-300 transition">
+                  🔒 Pay ${bk.totalAmount} EGP into Escrow (UC-11)
+                </button>
+              `;
+            } else if (bk.status === 'Ready for Pickup (QR)') {
+              actionButton = `
+                <button onclick="openQrModal('${bk.id}', 'pickup')" class="rounded-xl bg-indigo-500 px-4 py-2 text-xs font-bold text-white shadow hover:bg-indigo-400 transition">
+                  📱 Show / Scan Pickup QR Code (UC-12)
+                </button>
+              `;
+            } else if (bk.status === 'Active Rental') {
+              actionButton = `
+                <button onclick="openQrModal('${bk.id}', 'return')" class="rounded-xl bg-amber-400 px-4 py-2 text-xs font-extrabold text-slate-950 shadow hover:bg-amber-300 transition">
+                  🔄 Scan Return QR & Release Deposit
+                </button>
+              `;
+            } else if (bk.status === 'Completed') {
+              actionButton = bk.reviewed
+                ? `<span class="text-xs font-bold text-emerald-400">✔ Rated & Deposit Released</span>`
+                : `<button onclick="openReviewModal('${bk.id}')" class="rounded-xl bg-cyan-400 px-4 py-2 text-xs font-extrabold text-slate-950 hover:bg-cyan-300 transition">★ Rate & Review (UC-14)</button>`;
+            }
+
+            return `
+              <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 rounded-2xl border border-slate-800 bg-slate-900 p-4 shadow-sm">
+                <div class="flex items-center gap-4">
+                  <img src="${bk.itemImage}" alt="${bk.itemTitle}" class="h-20 w-20 rounded-xl object-cover bg-slate-800 shrink-0" />
+                  <div>
+                    <div class="flex flex-wrap items-center gap-2">
+                      <span class="text-xs font-extrabold text-slate-500">${bk.id}</span>
+                      <span class="rounded-full px-2.5 py-0.5 text-[11px] font-bold ${badgeColor}">${bk.status}</span>
+                    </div>
+                    <h3 class="mt-1 font-display text-base font-bold text-white">${bk.itemTitle}</h3>
+                    <p class="text-xs text-slate-400">Owner: <strong class="text-slate-200">${bk.ownerName}</strong> • Date: <strong class="text-slate-200">${bk.startDate}</strong> (${bk.durationCount} ${bk.durationType})</p>
+                    <p class="mt-1 text-xs font-semibold text-slate-300">Fee: ${bk.rentalFee} EGP + Escrow Deposit: <span class="text-cyan-400">${bk.deposit} EGP</span></p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-2 self-end md:self-center">
+                  ${actionButton}
+                </div>
+              </div>
+            `;
+          })
+          .join('');
+      }
+
+      const oReqContainer = document.getElementById('owner-requests-list');
+      oReqContainer.innerHTML = state.bookings.length
+        ? state.bookings
+            .map(
+              bk => `
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-2xl border border-slate-800 bg-slate-900 p-4 shadow-sm">
+            <div>
+              <span class="text-xs font-bold text-cyan-400">${bk.id} • Status: ${bk.status}</span>
+              <h4 class="font-display text-sm font-bold text-white">${bk.itemTitle}</h4>
+              <p class="text-xs text-slate-400">Requested by <strong class="text-slate-200">${bk.borrowerName}</strong> for ${bk.startDate} (${bk.durationCount} ${bk.durationType}) • Payout: <strong class="text-cyan-400">${bk.rentalFee} EGP</strong></p>
+            </div>
+            <div class="flex gap-2">
+              ${
+                bk.status === 'Pending Approval'
+                  ? `
+                <button onclick="ownerDecision('${bk.id}', true)" class="rounded-xl bg-cyan-400 px-3.5 py-2 text-xs font-extrabold text-slate-950 hover:bg-cyan-300">Approve (UC-09)</button>
+                <button onclick="ownerDecision('${bk.id}', false)" class="rounded-xl border border-rose-500/30 px-3.5 py-2 text-xs font-bold text-rose-400 hover:bg-rose-500/10">Reject</button>
+              `
+                  : `<span class="rounded-xl bg-slate-800 px-3 py-1.5 text-xs font-semibold text-slate-300">${bk.status}</span>`
+              }
+            </div>
+          </div>
+        `
+            )
+            .join('')
+        : `<p class="text-xs text-slate-400">No incoming rental requests yet.</p>`;
+
+      const oGrid = document.getElementById('owner-listings-grid');
+      oGrid.innerHTML = state.listings
+        .slice(0, 6)
+        .map(
+          item => `
+        <div class="rounded-2xl border border-slate-800 bg-slate-900 p-4 shadow-sm">
+          <div class="flex items-center gap-3">
+            <img src="${item.image}" class="h-14 w-14 rounded-xl object-cover" />
+            <div class="flex-1 min-w-0">
+              <h4 class="truncate font-display text-sm font-bold text-white">${item.title}</h4>
+              <p class="text-xs text-slate-400">${item.dailyRate} EGP/day • Deposit: ${item.deposit} EGP</p>
+            </div>
+          </div>
+          <div class="mt-3 flex items-center justify-between border-t border-slate-800 pt-3 text-xs">
+            <button onclick="toggleItemAvailability('${item.id}')" class="font-bold ${item.availableToday ? 'text-cyan-400' : 'text-amber-400'}">
+              ${item.availableToday ? '● Available Today (Toggle)' : '○ Marked Unavailable (Toggle)'}
+            </button>
+            <button onclick="deleteListing('${item.id}')" class="font-semibold text-rose-400 hover:underline">Delete (UC-05)</button>
+          </div>
+        </div>
+      `
+        )
+        .join('');
+    }
+
+    function ownerDecision(bookingId, approved) {
+      const bk = state.bookings.find(b => b.id === bookingId);
+      if (!bk) return;
+      bk.status = approved ? 'Approved - Pay Escrow' : 'Rejected';
+      addNotification(
+        approved ? 'Rental Request Approved' : 'Rental Request Rejected',
+        `Booking ${bk.id} for "${bk.itemTitle}" was ${approved ? 'approved. Proceed to Escrow checkout.' : 'declined by the owner.'}`
+      );
+      saveState();
+      renderDashboard();
+      showToast(approved ? 'Booking approved! Ready for Escrow payment.' : 'Booking request rejected.', approved ? 'success' : 'info');
+    }
+
+    function cancelBooking(bookingId) {
+      const bk = state.bookings.find(b => b.id === bookingId);
+      if (!bk) return;
+      bk.status = 'Cancelled';
+      saveState();
+      renderDashboard();
+      showToast(`Booking ${bookingId} cancelled prior to handover.`, 'info');
+    }
+
+    // ==================== ESCROW CHECKOUT (UC-11) ====================
+    function openEscrowModal(bookingId) {
+      const bk = state.bookings.find(b => b.id === bookingId);
+      if (!bk) return;
+      document.getElementById('escrow-modal-body').innerHTML = `
+        <p class="text-xs text-slate-400">Funds are held securely in <strong class="text-white">RentIt Escrow</strong> until you scan the return QR code.</p>
+        <div class="mt-4 rounded-2xl bg-slate-950 p-4 border border-slate-800 space-y-2 text-xs text-slate-300">
+          <div class="flex justify-between"><span>Equipment:</span><strong class="text-white">${bk.itemTitle}</strong></div>
+          <div class="flex justify-between"><span>Rental Fee (${bk.durationCount} ${bk.durationType}):</span><strong class="text-white">${bk.rentalFee} EGP</strong></div>
+          <div class="flex justify-between text-cyan-400"><span>Refundable Security Deposit:</span><strong>${bk.deposit} EGP</strong></div>
+          <div class="flex justify-between border-t border-slate-800 pt-2 text-sm font-extrabold text-white">
+            <span>Total Escrow Authorization:</span><span class="text-cyan-400">${bk.totalAmount} EGP</span>
+          </div>
+        </div>
+        <div class="mt-4 space-y-2.5 text-xs">
+          <label class="block font-semibold text-slate-300">Select Payment Method</label>
+          <select class="w-full rounded-xl border border-slate-700 bg-slate-800 px-3 py-2 font-semibold text-white">
+            <option>Visa / Mastercard (•••• 4242)</option>
+            <option>Meeza / Mobile Wallet (Vodafone Cash / InstaPay)</option>
+          </select>
+        </div>
+        <button onclick="confirmEscrowPayment('${bk.id}')" class="mt-5 w-full rounded-xl bg-cyan-400 py-3 text-sm font-extrabold text-slate-950 shadow-lg hover:bg-cyan-300 transition">
+          Authorize ${bk.totalAmount} EGP in Escrow
+        </button>
+      `;
+      document.getElementById('escrow-modal').classList.remove('hidden');
+    }
+
+    function confirmEscrowPayment(bookingId) {
+      const bk = state.bookings.find(b => b.id === bookingId);
+      if (!bk) return;
+      bk.status = 'Ready for Pickup (QR)';
+      addNotification('Escrow Payment Locked 🔒', `${bk.totalAmount} EGP secured in Escrow for ${bk.id}. Unique pickup QR code generated.`);
+      saveState();
+      closeModal('escrow-modal');
+      renderDashboard();
+      showToast('Escrow payment confirmed! Pickup QR Code is now active.', 'success');
+    }
+
+    // ==================== QR CODE HANDOVER & RETURN (UC-12) ====================
+    function openQrModal(bookingId, stage) {
+      const bk = state.bookings.find(b => b.id === bookingId);
+      if (!bk) return;
+      const isPickup = stage === 'pickup';
+
+      document.getElementById('qr-modal-body').innerHTML = `
+        <span class="rounded-full ${isPickup ? 'bg-indigo-500/20 text-indigo-300' : 'bg-amber-500/20 text-amber-300'} px-3 py-1 text-xs font-extrabold">
+          ${isPickup ? 'STEP 1: PICKUP HANDOVER QR (UC-12)' : 'STEP 2: RETURN & DEPOSIT RELEASE QR'}
+        </span>
+        <h3 class="mt-3 font-display text-xl font-extrabold text-white">${bk.itemTitle}</h3>
+        <p class="mt-1 text-xs text-slate-400">Booking ID: <strong class="text-slate-200">${bk.id}</strong> • Token: <code class="text-cyan-400">${bk.qrToken}</code></p>
+
+        <div class="mx-auto my-5 flex h-48 w-48 items-center justify-center rounded-2xl border-2 border-cyan-400 bg-white p-3 shadow-inner">
+          <svg viewBox="0 0 100 100" class="h-full w-full text-slate-900" fill="currentColor">
+            <rect x="5" y="5" width="25" height="25" fill="none" stroke="currentColor" stroke-width="5"/>
+            <rect x="11" y="11" width="13" height="13"/>
+            <rect x="70" y="5" width="25" height="25" fill="none" stroke="currentColor" stroke-width="5"/>
+            <rect x="76" y="11" width="13" height="13"/>
+            <rect x="5" y="70" width="25" height="25" fill="none" stroke="currentColor" stroke-width="5"/>
+            <rect x="11" y="76" width="13" height="13"/>
+            <rect x="40" y="10" width="8" height="8"/><rect x="52" y="18" width="8" height="8"/>
+            <rect x="38" y="38" width="24" height="24" rx="4" fill="#0891b2"/>
+            <rect x="12" y="42" width="14" height="8"/><rect x="72" y="45" width="16" height="8"/>
+            <rect x="42" y="72" width="10" height="18"/><rect x="65" y="68" width="12" height="12"/>
+            <rect x="82" y="80" width="10" height="12"/>
+          </svg>
+        </div>
+
+        <p class="text-xs text-slate-300 px-2">
+          ${
+            isPickup
+              ? 'Both Owner and Borrower verify tool condition and scan this code to officially start the rental period.'
+              : `Scanning at return confirms safe equipment handover and immediately releases the <strong class="text-cyan-400">${bk.deposit} EGP</strong> Escrow deposit back to the Borrower.`
+          }
+        </p>
+
+        <button onclick="confirmQrScan('${bk.id}', '${stage}')" class="mt-5 w-full rounded-xl ${isPickup ? 'bg-indigo-500 hover:bg-indigo-400 text-white' : 'bg-cyan-400 hover:bg-cyan-300 text-slate-950'} py-3 text-sm font-extrabold shadow-lg transition">
+          ${isPickup ? '📷 Simulate Dual QR Scan (Confirm Pickup)' : '📷 Simulate Return Scan & Release Escrow'}
+        </button>
+      `;
+      document.getElementById('qr-modal').classList.remove('hidden');
+    }
+
+    function confirmQrScan(bookingId, stage) {
+      const bk = state.bookings.find(b => b.id === bookingId);
+      if (!bk) return;
+
+      if (stage === 'pickup') {
+        bk.status = 'Active Rental';
+        addNotification('Handover Confirmed via QR', `Rental ${bk.id} is now ACTIVE. Enjoy using ${bk.itemTitle}!`);
+        showToast('QR Handover verified! Rental timer is now Active.', 'success');
+      } else {
+        bk.status = 'Completed';
+        addNotification('Return Verified & Escrow Released', `${bk.deposit} EGP security deposit released back to ${bk.borrowerName}.`);
+        showToast(`Return verified! ${bk.deposit} EGP deposit released from Escrow.`, 'success');
+      }
+      saveState();
+      closeModal('qr-modal');
+      renderDashboard();
+    }
+
+    // ==================== ADD / MANAGE LISTINGS (UC-04 & UC-05) ====================
+    function openAddListingModal() {
+      if (!state.currentUser) {
+        openAuthModal('signup');
+        showToast('Create an account or log in to list equipment!', 'warning');
+        return;
+      }
+      document.getElementById('add-listing-modal').classList.remove('hidden');
+    }
+
+    function submitNewListing(e) {
+      e.preventDefault();
+      const user = state.currentUser;
+      if (!user) return;
+      const newItem = {
+        id: 'item-' + Date.now(),
+        title: document.getElementById('new-title').value.trim(),
+        category: document.getElementById('new-category').value,
+        condition: document.getElementById('new-condition').value,
+        hourlyRate: parseInt(document.getElementById('new-hourly').value),
+        dailyRate: parseInt(document.getElementById('new-daily').value),
+        deposit: parseInt(document.getElementById('new-deposit').value),
+        distanceKm: 0.6,
+        location: document.getElementById('new-location').value.trim(),
+        ownerId: user.id,
+        ownerName: user.name,
+        ownerRating: 5.0,
+        reviewsCount: 1,
+        availableToday: true,
+        bookedDates: [],
+        image: document.getElementById('new-image').value.trim(),
+        description: document.getElementById('new-desc').value.trim()
+      };
+
+      state.listings.unshift(newItem);
+      addNotification('New Tool Published', `"${newItem.title}" is now live on the RentIt marketplace.`);
+      saveState();
+      closeModal('add-listing-modal');
+      applyFilters();
+      renderDashboard();
+      showToast('Equipment published to RentIt marketplace!', 'success');
+    }
+
+    function toggleItemAvailability(itemId) {
+      const item = state.listings.find(i => i.id === itemId);
+      if (!item) return;
+      item.availableToday = !item.availableToday;
+      saveState();
+      renderDashboard();
+      applyFilters();
+      showToast(`Updated availability for "${item.title}"`, 'info');
+    }
+
+    function deleteListing(itemId) {
+      state.listings = state.listings.filter(i => i.id !== itemId);
+      saveState();
+      renderDashboard();
+      applyFilters();
+      showToast('Equipment listing removed.', 'info');
+    }
+
+    // ==================== KYC VERIFICATION & ADMIN MODERATION ====================
+    function openKycModal() {
+      if (!state.currentUser) {
+        openAuthModal('signup');
+        return;
+      }
+      const user = state.currentUser;
+      const body = document.getElementById('kyc-modal-body');
+
+      if (user.kycStatus === 'Verified') {
+        body.innerHTML = `
+          <div class="rounded-2xl bg-cyan-500/10 border border-cyan-500/30 p-4 text-center">
+            <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-cyan-400 text-xl font-bold text-slate-950">✔</div>
+            <h4 class="mt-2 font-display text-base font-bold text-cyan-300">Identity Verified (${user.name})</h4>
+            <p class="mt-1 text-xs text-slate-300">Your National ID has been verified by RentIt Administration. You have full access to list equipment and submit rental bookings.</p>
+          </div>
+          <button onclick="simulateUnverifiedKyc()" class="mt-4 w-full rounded-xl border border-slate-700 bg-slate-800 py-2 text-xs font-semibold text-slate-300 hover:bg-slate-700">
+            Reset My KYC Status (To Test Upload Flow)
+          </button>
+        `;
+      } else {
+        body.innerHTML = `
+          <p class="text-slate-300 mb-3">Upload a clear photo of your <strong class="text-white">Egyptian National ID</strong> or <strong class="text-white">Passport</strong> to unlock Escrow bookings and tool listings.</p>
+          <form onsubmit="submitKycUpload(event)" class="space-y-3">
+            <div>
+              <label class="block font-semibold text-slate-300">Document Type</label>
+              <select id="kyc-doc-type" class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-800 px-3 py-2 text-white">
+                <option value="National ID Card">Egyptian National ID Card</option>
+                <option value="Passport">International Passport</option>
+              </select>
+            </div>
+            <div class="rounded-2xl border-2 border-dashed border-slate-700 bg-slate-950 p-5 text-center">
+              <p class="font-semibold text-slate-200">📄 Front & Back ID Scan Ready</p>
+              <p class="text-[11px] text-slate-400 mt-1">Encrypted via TLS & stored in Secure Cloud Storage</p>
+            </div>
+            <button type="submit" class="w-full rounded-xl bg-cyan-400 py-2.5 font-extrabold text-slate-950 hover:bg-cyan-300">
+              Submit for Admin Review (UC-03)
+            </button>
+          </form>
+        `;
+      }
+      document.getElementById('kyc-modal').classList.remove('hidden');
+    }
+
+    function simulateUnverifiedKyc() {
+      if (!state.currentUser) return;
+      state.currentUser.kycStatus = 'Unverified';
+      updateKycPill();
+      saveState();
+      openKycModal();
+    }
+
+    function submitKycUpload(e) {
+      e.preventDefault();
+      const user = state.currentUser;
+      if (!user) return;
+      user.kycStatus = 'Pending';
+      state.kycQueue.unshift({
+        id: 'kyc-' + Math.floor(200 + Math.random() * 800),
+        userName: user.name,
+        docType: document.getElementById('kyc-doc-type').value,
+        submittedAt: 'Just now',
+        status: 'Pending'
+      });
+      updateKycPill();
+      saveState();
+      closeModal('kyc-modal');
+      showToast('KYC Document submitted! Switch to Admin View to approve it.', 'success');
+    }
+
+    function renderAdminDashboard() {
+      const heldEscrow = state.bookings
+        .filter(b => b.status === 'Ready for Pickup (QR)' || b.status === 'Active Rental')
+        .reduce((sum, b) => sum + b.totalAmount, 0);
+      const completedCount = state.bookings.filter(b => b.status === 'Completed').length;
+
+      document.getElementById('admin-kpi-listings').textContent = state.listings.length;
+      document.getElementById('admin-kpi-kyc').textContent = state.kycQueue.filter(k => k.status === 'Pending').length;
+      document.getElementById('admin-kpi-escrow').textContent = `${heldEscrow} EGP`;
+      document.getElementById('admin-kpi-completed').textContent = completedCount;
+
+      const kycList = document.getElementById('admin-kyc-list');
+      kycList.innerHTML = state.kycQueue.length
+        ? state.kycQueue
+            .map(
+              k => `
+          <div class="flex items-center justify-between rounded-xl border border-slate-800 bg-slate-950/60 p-3 text-xs">
+            <div>
+              <p class="font-bold text-white">${k.userName} <span class="font-normal text-slate-400">(${k.docType})</span></p>
+              <p class="text-[11px] text-slate-500">Submitted ${k.submittedAt} • Status: <strong class="text-slate-300">${k.status}</strong></p>
+            </div>
+            ${
+              k.status === 'Pending'
+                ? `
+              <div class="flex gap-1.5">
+                <button onclick="adminKycAction('${k.id}', true)" class="rounded-lg bg-cyan-400 px-2.5 py-1.5 font-extrabold text-slate-950 hover:bg-cyan-300">Approve</button>
+                <button onclick="adminKycAction('${k.id}', false)" class="rounded-lg bg-rose-500/20 px-2.5 py-1.5 font-bold text-rose-400 hover:bg-rose-500/30">Reject</button>
+              </div>
+            `
+                : `<span class="rounded-lg bg-slate-800 px-2.5 py-1 font-bold text-slate-300">${k.status}</span>`
+            }
+          </div>
+        `
+            )
+            .join('')
+        : `<p class="text-xs text-slate-400">No pending KYC submissions.</p>`;
+
+      const listMod = document.getElementById('admin-listings-list');
+      listMod.innerHTML = state.listings
+        .map(
+          item => `
+        <div class="flex items-center justify-between rounded-xl border border-slate-800 bg-slate-950/60 p-3 text-xs">
+          <div class="min-w-0 pr-2">
+            <p class="truncate font-bold text-white">${item.title}</p>
+            <p class="text-[11px] text-slate-400">Owner: ${item.ownerName} • ${item.dailyRate} EGP/day</p>
+          </div>
+          <button onclick="deleteListing('${item.id}'); renderAdminDashboard()" class="shrink-0 rounded-lg border border-rose-500/30 px-2.5 py-1 font-semibold text-rose-400 hover:bg-rose-500/10">Remove</button>
+        </div>
+      `
+        )
+        .join('');
+    }
+
+    function adminKycAction(kycId, approve) {
+      const entry = state.kycQueue.find(k => k.id === kycId);
+      if (!entry) return;
+      entry.status = approve ? 'Verified' : 'Rejected';
+      if (state.currentUser && state.currentUser.name === entry.userName) {
+        state.currentUser.kycStatus = entry.status;
+      }
+      state.registeredAccounts.forEach(u => {
+        if (u.name === entry.userName) u.kycStatus = entry.status;
+      });
+      updateKycPill();
+      saveState();
+      renderAdminDashboard();
+      showToast(`KYC for ${entry.userName} marked as ${entry.status}.`, approve ? 'success' : 'info');
+    }
+
+    // ==================== MUTUAL RATING & REVIEW (UC-14) ====================
+    function openReviewModal(bookingId) {
+      const bk = state.bookings.find(b => b.id === bookingId);
+      if (!bk) return;
+      document.getElementById('review-modal-body').innerHTML = `
+        <form onsubmit="submitReview(event, '${bk.id}')" class="space-y-3 text-xs sm:text-sm">
+          <p class="text-slate-300">Share your experience renting <strong class="text-white">${bk.itemTitle}</strong> from <strong class="text-white">${bk.ownerName}</strong>.</p>
+          <div>
+            <label class="block font-semibold text-slate-300">Star Rating</label>
+            <select id="review-stars" class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-800 px-3 py-2 font-bold text-amber-400">
+              <option value="5">★★★★★ (5.0 - Excellent Condition & Punctual)</option>
+              <option value="4">★★★★☆ (4.0 - Great Experience)</option>
+              <option value="3">★★★☆☆ (3.0 - Average)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-300">Written Review</label>
+            <textarea id="review-text" required rows="3" placeholder="Tool worked smoothly, easy QR handover and instant deposit release!" class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-800 px-3 py-2 text-white placeholder-slate-400"></textarea>
+          </div>
+          <button type="submit" class="w-full rounded-xl bg-cyan-400 py-2.5 font-extrabold text-slate-950 hover:bg-cyan-300">Submit Verified Review</button>
+        </form>
+      `;
+      document.getElementById('review-modal').classList.remove('hidden');
+    }
+
+    function submitReview(e, bookingId) {
+      e.preventDefault();
+      const bk = state.bookings.find(b => b.id === bookingId);
+      if (bk) bk.reviewed = true;
+      const item = state.listings.find(i => i.id === bk.itemId);
+      if (item) item.reviewsCount += 1;
+      saveState();
+      closeModal('review-modal');
+      renderDashboard();
+      applyFilters();
+      showToast('Thank you! Your mutual review has been published.', 'success');
+    }
+
+    // ==================== GEMINI AI ASSISTANT DRAWER ====================
+    function toggleAiAssistantDrawer() {
+      document.getElementById('ai-drawer').classList.toggle('hidden');
+    }
+
+    function askAiPreset(promptText) {
+      document.getElementById('ai-input').value = promptText;
+      sendAiPrompt(new Event('submit'));
+    }
+
+    async function sendAiPrompt(e) {
+      e.preventDefault();
+      const input = document.getElementById('ai-input');
+      const sendBtn = document.getElementById('ai-send-btn');
+      const box = document.getElementById('ai-messages-box');
+      const userText = input.value.trim();
+      if (!userText) return;
+
+      box.innerHTML += `
+        <div class="flex flex-col items-end animate-card">
+          <span class="text-[10px] text-slate-500 mb-0.5">You</span>
+          <div class="max-w-[85%] rounded-2xl rounded-br-none bg-cyan-400 px-3.5 py-2.5 font-medium text-slate-950">
+            ${userText}
+          </div>
+        </div>
+      `;
+      input.value = '';
+      sendBtn.disabled = true;
+      sendBtn.textContent = '...';
+
+      const loadingId = 'ai-loading-' + Date.now();
+      box.innerHTML += `
+        <div id="${loadingId}" class="flex flex-col items-start">
+          <span class="text-[10px] text-cyan-400 mb-0.5 font-semibold">RentIt AI Advisor</span>
+          <div class="rounded-2xl rounded-bl-none border border-cyan-500/20 bg-slate-900 px-3.5 py-2.5 text-slate-400 animate-pulse">
+            Analyzing catalog & matching tools...
+          </div>
+        </div>
+      `;
+      box.scrollTop = box.scrollHeight;
+
+      const catalogSummary = state.listings
+        .map(i => `- ${i.title} (${i.category}, ${i.dailyRate} EGP/day, ${i.distanceKm} km away in ${i.location})`)
+        .join('\n');
+
+      const systemPrompt = `You are the RentIt AI Project Advisor for an equipment rental platform in Damietta, Egypt ("Rent What You Need, Rent Out What You Own!").
+Recommend relevant tools from the current catalog below, explain why they fit the user's task, mention estimated daily costs in EGP, and include a concise safety tip. Keep responses friendly, structured with bullet points, and under 130 words.
+Available Catalog:\n${catalogSummary}`;
+
+      let replyText = '';
+      try {
+        const apiKey = '';
+        if (apiKey) {
+          const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+          const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              contents: [{ parts: [{ text: userText }] }],
+              systemInstruction: { parts: [{ text: systemPrompt }] }
+            })
+          });
+          const data = await response.json();
+          replyText = data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+        }
+      } catch (err) {
+        replyText = '';
+      }
+
+      if (!replyText) {
+        const q = userText.toLowerCase();
+        if (q.includes('concrete') || q.includes('drill') || q.includes('wall') || q.includes('shelf')) {
+          replyText =
+            'For concrete walls, I recommend renting:\n• **Bosch GBH 2-26 DRE Rotary Hammer Drill** (180 EGP/day, 0.8 km away) — handles masonry effortlessly.\n• **Telescopic Aluminum Ladder** (130 EGP/day) for high shelves.\n• **Safety Tip:** Wear protective goggles and check for hidden wiring with a multimeter first!';
+        } else if (q.includes('photo') || q.includes('camera') || q.includes('shoot')) {
+          replyText =
+            "For a crisp photoshoot, check out:\n• **Sony Alpha a6400 Mirrorless 4K Camera Kit** (380 EGP/day, 1.4 km away) — includes 16-50mm lens & 2 batteries.\n• **Pro Tip:** Book 1 day ahead and use RentIt's QR handover to verify lens condition at pickup.";
+        } else {
+          replyText =
+            'RentIt protects every rental with **Escrow Deposit Holding** (your security deposit is locked safely until the return QR code is scanned) and **KYC ID Verification**. Tell me what task you are tackling and I will match the best local tools!';
+        }
+      }
+
+      const formattedReply = replyText
+        .replace(/\*\*(.*?)\*\*/g, '<strong class="text-white">$1</strong>')
+        .replace(/\n/g, '<br/>');
+
+      const loaderEl = document.getElementById(loadingId);
+      if (loaderEl) {
+        loaderEl.innerHTML = `
+          <span class="text-[10px] text-cyan-400 mb-0.5 font-semibold">RentIt AI Advisor</span>
+          <div class="max-w-[88%] rounded-2xl rounded-bl-none border border-cyan-500/25 bg-slate-900 px-3.5 py-2.5 text-slate-200 leading-relaxed">
+            ${formattedReply}
+          </div>
+        `;
+      }
+
+      sendBtn.disabled = false;
+      sendBtn.textContent = 'Ask AI';
+      box.scrollTop = box.scrollHeight;
+    }
+
+    // ==================== IN-APP MESSAGING & NOTIFICATIONS ====================
+    function toggleChatDrawer(ownerName, itemTitle) {
+      const drawer = document.getElementById('chat-drawer');
+      if (ownerName) {
+        document.getElementById('chat-partner-subtitle').textContent = `Chatting with ${ownerName} • Re: ${itemTitle}`;
+      }
+      drawer.classList.toggle('hidden');
+      if (!drawer.classList.contains('hidden')) {
+        document.getElementById('chat-unread-badge').classList.add('hidden');
+        renderChatMessages();
+      }
+    }
+
+    function renderChatMessages() {
+      const box = document.getElementById('chat-messages-box');
+      const currentUser = state.currentUser ? state.currentUser.name : 'Guest';
+      box.innerHTML = state.messages
+        .map(m => {
+          const isMe = m.sender === currentUser;
+          return `
+          <div class="flex flex-col ${isMe ? 'items-end' : 'items-start'}">
+            <span class="text-[10px] text-slate-500 mb-0.5">${m.sender} • ${m.time}</span>
+            <div class="max-w-[80%] rounded-2xl px-3.5 py-2.5 ${
+              isMe
+                ? 'bg-cyan-400 font-medium text-slate-950 rounded-br-none'
+                : 'bg-slate-800 border border-slate-700 text-slate-100 rounded-bl-none shadow-xs'
+            }">
+              ${m.text}
+            </div>
+          </div>
+        `;
+        })
+        .join('');
+      box.scrollTop = box.scrollHeight;
+    }
+
+    function sendChatMessage(e) {
+      e.preventDefault();
+      if (!state.currentUser) {
+        openAuthModal('login');
+        showToast('Please sign in to send messages!', 'warning');
+        return;
+      }
+      const input = document.getElementById('chat-input');
+      const text = input.value.trim();
+      if (!text) return;
+      const user = state.currentUser;
+      state.messages.push({
+        id: 'm-' + Date.now(),
+        sender: user.name,
+        role: state.currentRole,
+        text,
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      });
+      input.value = '';
+      saveState();
+      renderChatMessages();
+    }
+
+    function toggleNotifDropdown() {
+      const dd = document.getElementById('notif-dropdown');
+      dd.classList.toggle('hidden');
+      if (!dd.classList.contains('hidden')) renderNotifications();
+    }
+
+    function addNotification(title, desc) {
+      state.notifications.unshift({
+        id: 'n-' + Date.now(),
+        title,
+        desc,
+        time: 'Just now',
+        read: false
+      });
+      renderNotifications();
+    }
+
+    function renderNotifications() {
+      const list = document.getElementById('notif-list');
+      if (!list) return;
+      list.innerHTML = state.notifications
+        .map(
+          n => `
+        <div class="rounded-xl p-2.5 ${n.read ? 'bg-slate-950/60 text-slate-400' : 'bg-cyan-500/10 border border-cyan-500/30 text-slate-100'}">
+          <div class="flex justify-between font-bold">
+            <span>${n.title}</span>
+            <span class="text-[10px] font-normal text-slate-500">${n.time}</span>
+          </div>
+          <p class="mt-0.5 text-[11px]">${n.desc}</p>
+        </div>
+      `
+        )
+        .join('');
+    }
+
+    function markAllNotifsRead() {
+      state.notifications.forEach(n => (n.read = true));
+      saveState();
+      renderNotifications();
+    }
+
+    function updateHeaderBadges() {
+      const unreadNotifs = state.notifications.filter(n => !n.read).length;
+      const badge = document.getElementById('notif-badge');
+      if (badge) {
+        badge.textContent = unreadNotifs;
+        badge.classList.toggle('hidden', unreadNotifs === 0);
+      }
+      const bkBadge = document.getElementById('badge-bookings');
+      if (bkBadge) bkBadge.textContent = state.bookings.length;
+    }
+
+    // ==================== UTILITIES & AUTH HANDLERS ====================
+    function openAuthModal(defaultTab = 'signup') {
+      document.getElementById('auth-modal').classList.remove('hidden');
+      switchAuthTab(defaultTab);
+    }
+
+    function switchAuthTab(tab) {
+      const signupBtn = document.getElementById('auth-tab-signup');
+      const loginBtn = document.getElementById('auth-tab-login');
+      const signupForm = document.getElementById('auth-form-signup');
+      const loginForm = document.getElementById('auth-form-login');
+
+      if (tab === 'signup') {
+        signupBtn.className = 'rounded-lg bg-slate-800 py-2 text-cyan-400 shadow-xs transition';
+        loginBtn.className = 'rounded-lg py-2 text-slate-400 hover:text-white transition';
+        signupForm.classList.remove('hidden');
+        loginForm.classList.add('hidden');
+      } else {
+        loginBtn.className = 'rounded-lg bg-slate-800 py-2 text-cyan-400 shadow-xs transition';
+        signupBtn.className = 'rounded-lg py-2 text-slate-400 hover:text-white transition';
+        loginForm.classList.remove('hidden');
+        signupForm.classList.add('hidden');
+      }
+    }
+
+    function handleRegisterNewUser(e) {
+      e.preventDefault();
+      const fullName = document.getElementById('reg-name').value.trim();
+      const email = document.getElementById('reg-email').value.trim();
+      const password = document.getElementById('reg-password').value;
+      const location = document.getElementById('reg-location').value;
+      const role = document.getElementById('reg-role').value;
+
+      if (state.registeredAccounts.some(acc => acc.email.toLowerCase() === email.toLowerCase())) {
+        showToast('An account with this email already exists. Please log in!', 'warning');
+        switchAuthTab('login');
+        document.getElementById('login-email').value = email;
+        return;
+      }
+
+      const initials = fullName
+        .split(' ')
+        .map(w => w[0])
+        .join('')
+        .substring(0, 2)
+        .toUpperCase();
+
+      const newUser = {
+        id: 'u-' + Date.now(),
+        name: fullName,
+        email,
+        password,
+        initials: initials || 'U',
+        location,
+        kycStatus: 'Unverified',
+        role
+      };
+
+      state.registeredAccounts.push(newUser);
+      state.currentUser = newUser;
+      addNotification('Welcome to RentIt!', `Account created for ${fullName}. Complete KYC Verification to start renting.`);
+      closeModal('auth-modal');
+      handleRoleSwitch(role);
+      showToast(`Account created! Welcome, ${fullName}.`, 'success');
+    }
+
+    function handleCustomLogin(e) {
+      e.preventDefault();
+      const email = document.getElementById('login-email').value.trim().toLowerCase();
+      const password = document.getElementById('login-password').value;
+      const found = state.registeredAccounts.find(
+        acc => acc.email.toLowerCase() === email && acc.password === password
+      );
+      if (found) {
+        state.currentUser = found;
+        closeModal('auth-modal');
+        handleRoleSwitch(found.role || 'borrower');
+        showToast(`Welcome back, ${found.name}!`, 'success');
+      } else {
+        showToast('Invalid email or password. Please check your details or Sign Up.', 'warning');
+      }
+    }
+
+    function handleLogout() {
+      state.currentUser = null;
+      state.currentRole = 'borrower';
+      syncAuthHeaderUI();
+      switchMainView('marketplace');
+      saveState();
+      showToast('You have been logged out.', 'info');
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.add('hidden');
+    }
+
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      const colors = {
+        success: 'bg-slate-900 border-cyan-400 text-white',
+        warning: 'bg-amber-950 border-amber-400 text-amber-100',
+        info: 'bg-slate-800 border-slate-500 text-white'
+      };
+      toast.className = `pointer-events-auto flex items-center gap-2.5 rounded-2xl border-l-4 ${colors[type]} px-4 py-3 text-xs font-semibold shadow-2xl animate-card`;
+      toast.innerHTML = `<span>${type === 'success' ? '✔' : 'ℹ'}</span><span>${message}</span>`;
+      container.appendChild(toast);
+      setTimeout(() => toast.remove(), 3500);
+    }
+
+    function renderAll() {
+      syncAuthHeaderUI();
+      renderCategoryPills();
+      applyFilters();
+      renderAiRecommendations();
+      renderDashboard();
+      renderAdminDashboard();
+      renderNotifications();
+      updateHeaderBadges();
+    }
+  </script>
+</body>
+</html>
